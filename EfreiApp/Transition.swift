@@ -19,7 +19,6 @@ class transitionSegue {
         let naviVC = storyBoard.instantiateViewController(withIdentifier: "MenuVC")
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.window?.rootViewController = naviVC
-        
     }
     
     func switchToWalkThrough() {
@@ -28,7 +27,6 @@ class transitionSegue {
         let naviVC = storyBoard.instantiateViewController(withIdentifier: "walkThrough")
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.window?.rootViewController = naviVC
-        
     }
     
     func switchToLoginview() {
@@ -37,7 +35,6 @@ class transitionSegue {
         let naviVC = storyBoard.instantiateViewController(withIdentifier: "loginView")
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.window?.rootViewController = naviVC
-        
     }
 }
 

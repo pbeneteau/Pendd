@@ -11,6 +11,7 @@ import CoreLocation
 import Firebase
 import SwiftLocation
 import SwiftyJSON
+import EventKit
 
 
 class AskHelp: AnyObject {
@@ -19,6 +20,9 @@ class AskHelp: AnyObject {
     
     let ref: FIRDatabaseReference = FIRDatabase.database().reference()
     let user = FIRAuth.auth()?.currentUser
+    
+    let eventStore : EKEventStore = EKEventStore()
+
     
     private var userLocation: CLLocation!
     private var address: String!
@@ -39,29 +43,22 @@ class AskHelp: AnyObject {
     }
     
     // Upload the request to database
-    func sendData(price: String, task: String, date: Date, address: String, location: CLLocation, countryCode: String, state: String, userIsAtHome: Bool) {
+    func sendData(price: String, task: String, date: Date, address: String, street: String, countryCode: String, state: String, userIsAtHome: Bool, descriptionText: String, title: String) {
        
         let taskKey: String = randomString(length: 25)
-        let taskDate: String = convertDateToString(dateToConvert : date)
         
         print("Sending ask data...")
         
-        ref.child("asks").child(countryCode).child(state).child(task).child(taskKey).setValue("")
-        ref.child("asks").child(countryCode).child(state).child(task).child(taskKey).child("price").setValue(price)
-        ref.child("asks").child(countryCode).child(state).child(task).child(taskKey).child("date").setValue(taskDate)
-        ref.child("asks").child(countryCode).child(state).child(task).child(taskKey).child("location").setValue("\(location)")
-        ref.child("asks").child(countryCode).child(state).child(task).child(taskKey).child("user").setValue((user?.uid)!)
-        ref.child("asks").child(countryCode).child(state).child(task).child(taskKey).child("address").setValue(address)
-        ref.child("asks").child(countryCode).child(state).child(task).child(taskKey).child("userIsAtHome").setValue(userIsAtHome)
-        ref.child("asks").child(countryCode).child(state).child(task).child(taskKey).child("task").setValue(task)
-        ref.child("asks").child(countryCode).child(state).child(task).child(taskKey).child("nsDate").setValue("\(date)")
+        let dict = ["price" : "\(price)", "date": "\(date)", "user": "\((user?.uid)!)", "address": "\(address)", "street": "\(street)", "userIsAtHome": "\(userIsAtHome)", "category": "\(task)", "description": "\(descriptionText)", "title" : "\(title)"]
         
-        ref.child("users").child((user?.uid)!).child("asks").child(taskKey).child("price").setValue(price)
-        ref.child("users").child((user?.uid)!).child("asks").child(taskKey).child("task").setValue(task)
-        ref.child("users").child((user?.uid)!).child("asks").child(taskKey).child("address").setValue(address)
-        ref.child("users").child((user?.uid)!).child("asks").child(taskKey).child("date").setValue(taskDate)
-        ref.child("users").child((user?.uid)!).child("asks").child(taskKey).child("nsDate").setValue("\(date)")
         
+        for info in dict {
+            ref.child("asks").child(countryCode).child(state).child(task).child(taskKey).child("\(info.key)").setValue("\(info.value)")
+        }
+         for info in dict {
+            ref.child("users").child((user?.uid)!).child("asks").child(taskKey).child("\(info)").setValue("\(info.value)")
+        }
+
         print("Done")
     }
     
@@ -79,18 +76,6 @@ class AskHelp: AnyObject {
             randomString += NSString(characters: &nextChar, length: 1) as String
         }
         return randomString
-    }
-    
-    // Convert NSDate to String
-    func convertDateToString(dateToConvert : Date) -> String{
-        let calendar = Calendar.current
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd-MM-yyyy"
-        let comp = calendar.dateComponents([.hour, .minute], from: dateToConvert)
-        let hour = comp.hour
-        let minute = comp.minute
-        let dateString = dateFormatter.string(from: dateToConvert)
-        return "\(dateString) at \(hour!):\(minute!)"
     }
     
 }

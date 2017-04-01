@@ -8,21 +8,28 @@
 
 import UIKit
 import EventKit
+import Cosmos
 
 
-class TaskDetailViewController: UIViewController {
+class SubmitHelpProposalViewController: UIViewController {
 
     
     @IBOutlet weak var taskTypeLabel: UILabel!
     @IBOutlet weak var taskDateLabel: UILabel!
     @IBOutlet weak var taskDistanceLabel: UILabel!
     @IBOutlet weak var taskAddressLabel: UILabel!
+    @IBOutlet weak var taskDescriptionLabel: UITextView!
+    @IBOutlet weak var userRatingStars: CosmosView!
     
-    var address: String = ""
-    var task: String = ""
-    var date: String = ""
-    var distance: Double = 0.0
-    var nsDate: String = ""
+    var taskTitle: String = ""
+    var taskDescription: String = ""
+    var taskAddress: String = ""
+    var taskDate: String = ""
+    var taskDistance: Int = 0
+    
+    var userPhoneNumber: String = ""
+    var userId: String = ""
+    var userName: String = ""
     
     let df: DateFormatter = DateFormatter()
     
@@ -47,17 +54,37 @@ class TaskDetailViewController: UIViewController {
         
         if let detailTask = detailTask {
             
-            if let typeLabel = taskTypeLabel, let dateLabel = taskDateLabel, let distanceLabel = taskDistanceLabel, let addressLabel = taskAddressLabel {
-                typeLabel.text = detailTask.type
+            if let typeLabel = taskTypeLabel, let dateLabel = taskDateLabel, let distanceLabel = taskDistanceLabel, let addressLabel = taskAddressLabel, let descriptionLabel = taskDescriptionLabel {
+                
+                userId = detailTask.user
+                
+                typeLabel.text = detailTask.title
                 dateLabel.text = detailTask.date
+                
                 distanceLabel.text = "\(Int(detailTask.distance!))m"
+                if detailTask.distance! > 1000 {
+                    distanceLabel.text = String(format: "%.1fkm", Float(detailTask.distance!) / 1000)
+                }
                 addressLabel.text = detailTask.address
+                descriptionLabel.text = detailTask.description
+                
+                if let ratingStars = userRatingStars {
+                    mainUser().initAverageMark(userId: userId) { rating in
+                        ratingStars.rating = rating
+                        
+                    }
+                }
             }
-            address = (detailTask.address!)
-            task = (detailTask.type!)
-            date = (detailTask.date!)
-            distance = (detailTask.distance!)
-            nsDate = (detailTask.nsDate!)
+            
+            taskAddress = (detailTask.address!)
+            taskTitle = (detailTask.title!)
+            taskDate = (detailTask.date!)
+            taskDistance = Int(detailTask.distance!)
+            
+            mainUser().initUserPhoneNumber(userId: detailTask.user) { phoneNumber in
+                
+                self.userPhoneNumber = phoneNumber
+            }
         }
     }
     
@@ -66,28 +93,22 @@ class TaskDetailViewController: UIViewController {
     }
     
     @IBAction func acceptTaskButton(_ sender: Any) {
-        /*let newString = address.replacingOccurrences(of: " ", with: "+")
-        let URL = "http://maps.apple.com/?address=\(newString)"
-        openMap(scheme: URL)
-         */
+
         let calendar = NSCalendar.current
         
-        let description = "Address: \(address)"
-        let beginDateString = self.nsDate
+        let description = "Address: \(taskAddress)"
         
+        //let beginDateString = self.nsDate
         
-        df.dateFormat = "yyyy-MM-dd hh:mm:ss Z"
-        print(beginDateString)
-        let beginDate = df.date(from: beginDateString)
-        while beginDate == nil {
-           print("nil")
-        }
+        df.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+        //print(beginDateString)
+        //let beginDate = df.date(from: beginDateString)
         
-        let endDate = calendar.date(byAdding: .hour, value: 2, to: beginDate!)
+        //let endDate = calendar.date(byAdding: .hour, value: 2, to: beginDate!)
         
         print("Adding to calendar")
         
-        addEventToCalendar(title: task, description: description, startDate: beginDate!, endDate: endDate!)
+        //addEventToCalendar(title: task, description: description, startDate: beginDate!, endDate: endDate!)
     }
     
     func openMap(scheme: String) {        
@@ -105,27 +126,7 @@ class TaskDetailViewController: UIViewController {
         }
     }
     
-    func addEventToCalendar(title: String, description: String?, startDate: Date, endDate: Date, completion: ((_ success: Bool, _ error: NSError?) -> Void)? = nil) {
-        let eventStore = EKEventStore()
+    func phoneNumberFormat() {
         
-        eventStore.requestAccess(to: .event, completion: { (granted, error) in
-            if (granted) && (error == nil) {
-                let event = EKEvent(eventStore: eventStore)
-                event.title = title
-                event.startDate = startDate as Date
-                event.endDate = endDate as Date
-                event.notes = description
-                event.calendar = eventStore.defaultCalendarForNewEvents
-                do {
-                    try eventStore.save(event, span: .thisEvent)
-                } catch let e as NSError {
-                    completion?(false, e)
-                    return
-                }
-                completion?(true, nil)
-            } else {
-                completion?(false, error as NSError?)
-            }
-        })
     }
 }

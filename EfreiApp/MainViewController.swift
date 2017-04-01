@@ -19,9 +19,6 @@ import Sparrow
 
 class MainViewController: UIViewController, NVActivityIndicatorViewable {
     
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var emailLabel: UILabel!
-    
     
     let ref = FIRDatabase.database().reference()
     let user = FIRAuth.auth()?.currentUser
@@ -38,13 +35,13 @@ class MainViewController: UIViewController, NVActivityIndicatorViewable {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // DeviceInfos().ExitOnJailbreak()
+        
         if DeviceInfos().isInternetAvailable() == false {
             print("No connexion")
         } else {
             print("Connexion detected")
-            
 
-            initLocationDetails()
             
             if user == nil {
                 transitionSegue.segue.switchToLoginview()
@@ -63,15 +60,7 @@ class MainViewController: UIViewController, NVActivityIndicatorViewable {
         // Dispose of any resources that can be recreated.
     }
     
-    func initLocationDetails() {
-        
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        locationClass.setLocation { success in
-            if success {
-            }
-        }
-        UIApplication.shared.isNetworkActivityIndicatorVisible = false
-    }
+
     
     @IBAction func disconnectButton(_ sender: Any) {
         
@@ -86,6 +75,12 @@ class MainViewController: UIViewController, NVActivityIndicatorViewable {
             }
         }
         print("user did logout")
+    }
+    @IBAction func profileButton(_ sender: Any) {
+        
+    }
+    
+    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     }
     
     @IBAction func helpButtonAction(_ sender: Any) {

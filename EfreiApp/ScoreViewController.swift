@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class ScoreViewController: UIViewController {
     
@@ -21,28 +22,35 @@ class ScoreViewController: UIViewController {
     private var totalAsks: Double!
     private var totalHelps: Double!
     private var ratioHA: Double!
+    private var user = FIRAuth.auth()?.currentUser
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         initInfos()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     func initInfos() {
-        mainUser().initAverageMark{ mark in
-            self.averageMarkLabel.text = "Average mark: \(mark)"
-        }
-        mainUser().initTotalHelps{ total in
-            self.totalHelpsLabel.text = "Total helps completed: \(total)"
-        }
-        mainUser().initTotalAsks{ total in
-            self.totalAsksLabel.text = "Total asks sent: \(total)"
+        mainUser().initAverageMark(userId: (user?.uid)!){ mark in
+            self.averageMarkLabel.text = "Review: \(mark)"
+            
+            mainUser().initTotalHelps(userId: (self.user?.uid)!) { total in
+                self.totalHelpsLabel.text = "Total helps completed: \(total)"
+                
+                mainUser().initTotalAsks(userId: (self.user?.uid)!) { total1 in
+                    self.totalAsksLabel.text = "Total asks sent: \(total1)"
+                    self.ratioLabel.text = "Ratio Helps/Asks: \(total/total1)"
+                }
+            }
         }
     }
-
+    
+    @IBAction func closeButton(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
 }

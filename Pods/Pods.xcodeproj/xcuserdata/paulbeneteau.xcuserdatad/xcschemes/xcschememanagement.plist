@@ -9,6 +9,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Cosmos.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>DGElasticPullToRefresh.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>DateTimePicker.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -30,6 +40,11 @@
 			<false/>
 		</dict>
 		<key>NVActivityIndicatorView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>PhoneNumberKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -74,15 +89,40 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>YALSideMenu.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>0199BB4D774EC2AA7420DE77D7ED71DB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>0586BC2F8403FA9A43A6945021BAC6DA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>20A9DD9ABBF08BC57372A26C35327BF1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3E043EFFBC62F63C0048EC0737EEECF8</key>
+		<key>249910444F75636982E4B92BA21F9997</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2F0FE1E2A5B1EF15139E10A40F05CE94</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3145C0A9FC1F9A2469C202F203E5FE2D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -92,12 +132,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4670B5D82B9CB4F14A3BCA253D046642</key>
+		<key>4116E563595E603ADAB5102F54EB7ACF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>51D7B820AD4565F6506F9D35E9C75D54</key>
+		<key>47D07B436D82BB983C8429FF84F919A3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -107,22 +147,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5E9C76532FBDC630C845FBF831ADA67B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>6A79F15FC006A96328C891D9875E1F0A</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>6D5CEDECD3D8DC52EA507E0431BDA8A0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>73C1E3E18591EB7FE1DD97CA9013A371</key>
+		<key>8C5BD10883BD185426DD737247F56DEC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -143,6 +173,16 @@
 			<true/>
 		</dict>
 		<key>C17C64536DE6DABE1FE71D33127E2ECB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E01E53E0F70BE2A729763AA336E005F2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E29707831CB1CCE68A10BB505B59CD7B</key>
 		<dict>
 			<key>primary</key>
 			<true/>

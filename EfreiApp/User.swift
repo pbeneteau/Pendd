@@ -27,8 +27,8 @@ class mainUser {
     
     let Location1: LocationManager = LocationManager()
     
-    func initUserFirstName(completionHandler: @escaping (_ total: String) -> ()) {
-        let userRef = ref.child("users").child((user?.uid)!).child("firstName")
+    func initUserFirstName(userId: String, completionHandler: @escaping (_ total: String) -> ()) {
+        let userRef = ref.child("users").child(userId).child("firstName")
         
         userRef.observeSingleEvent(of: .value, with: { (snapshot) -> Void in
             if let firstName: String = snapshot.value as? String {
@@ -39,8 +39,8 @@ class mainUser {
         }
     }
     
-    func initUserLastName(completionHandler: @escaping (_ total: String) -> ()) {
-        let userRef = ref.child("users").child((user?.uid)!).child("lastName")
+    func initUserLastName(userId: String, completionHandler: @escaping (_ total: String) -> ()) {
+        let userRef = ref.child("users").child(userId).child("lastName")
         
         userRef.observeSingleEvent(of: .value, with: { (snapshot) -> Void in
             if let lastName: String = snapshot.value as? String {
@@ -51,8 +51,8 @@ class mainUser {
         }
     }
     
-    func initTotalAsks(completionHandler: @escaping (_ total: Double) -> ()) {
-        let userRef = ref.child("users").child((user?.uid)!).child("asks")
+    func initTotalAsks(userId: String, completionHandler: @escaping (_ total: Double) -> ()) {
+        let userRef = ref.child("users").child(userId).child("asks")
         
         userRef.observeSingleEvent(of: .value, with: { (snapshot) -> Void in
             let total1: Double = Double(snapshot.childrenCount)
@@ -62,8 +62,8 @@ class mainUser {
         }
     }
     
-    func initTotalHelps(completionHandler: @escaping (_ total: Double) -> ()) {
-        let userRef = ref.child("users").child((user?.uid)!).child("totalHelps")
+    func initTotalHelps(userId: String, completionHandler: @escaping (_ total: Double) -> ()) {
+        let userRef = ref.child("users").child(userId).child("totalHelps")
         
         userRef.observeSingleEvent(of: .value, with: { (snapshot) -> Void in
             let total: Double = snapshot.value as! Double
@@ -73,13 +73,26 @@ class mainUser {
         }
     }
     
-    func initAverageMark(completionHandler: @escaping (_ mark: Double) -> ()) {
+    func initAverageMark(userId: String, completionHandler: @escaping (_ mark: Double) -> ()) {
 
-        let userRef = ref.child("users").child((user?.uid)!).child("mark")
+        let userRef = ref.child("users").child(userId).child("mark")
         
         userRef.observeSingleEvent(of: .value, with: { (snapshot) -> Void in
             if let mark: Double = snapshot.value as? Double {
                 completionHandler(mark)
+            }
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+    }
+    
+    func initUserPhoneNumber(userId: String, completionHandler: @escaping (_ phoneNumber: String) -> ()) {
+        
+        let userRef = ref.child("users").child(userId).child("tel")
+        
+        userRef.observeSingleEvent(of: .value, with: { (snapshot) -> Void in
+            if let phoneNumber: String = snapshot.value as? String {
+                completionHandler(phoneNumber)
             }
         }) { (error) in
             print(error.localizedDescription)

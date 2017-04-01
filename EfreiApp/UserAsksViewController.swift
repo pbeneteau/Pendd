@@ -30,7 +30,6 @@ class UserAsksViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.backgroundColor = UIColor(red:0.24, green:0.63, blue:0.82, alpha:1.0)
         tableView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refreshData(sender:)), for: .valueChanged)
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -93,11 +92,11 @@ class UserAsksViewController: UIViewController, UITableViewDelegate, UITableView
             
             if let dict = snapshot.value as? [String : [String:Any]] {
                 for (_, value) in dict {
-                    if let task: String = value["task"] as? String {
+                    if let title: String = value["title"] as? String {
                         if let taskDate = value["date"] as? String {
                             if let taskPrice = value["price"] as? String {
                                 if let taskAddress: String = value["address"] as? String {
-                                    let asksArray = userAsks(date: taskDate, type: task, address: taskAddress, price: taskPrice)
+                                    let asksArray = userAsks(date: taskDate, type: title, address: taskAddress, price: taskPrice)
                                     self.asksList.append(asksArray)
                                 }
                             }

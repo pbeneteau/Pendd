@@ -190,9 +190,6 @@ open class EZSwipeController: UIViewController {
         setupPageViewController()
     }
     
-    override open func viewDidLoad() {
-        super.viewDidLoad()
-    }
     
     @objc open func leftButtonAction() {
         let currentIndex = stackPageVC.index(of: currentStackVC)!

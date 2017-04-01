@@ -42,9 +42,11 @@ class CurrentUserProfileViewController: UIViewController {
         
     }
     
+    
+    
     func initInfos() {
-        mainUser().initUserFirstName { firstName in
-            mainUser().initUserLastName { lastName in
+        mainUser().initUserFirstName(userId: (user?.uid)!) { firstName in
+            mainUser().initUserLastName(userId: (self.user?.uid)!) { lastName in
                 self.userNameLabel.text = "\(firstName) \(lastName)"
                 self.userEmailLabel.text = self.user?.email
             }
@@ -70,5 +72,4 @@ class CurrentUserProfileViewController: UIViewController {
     
     @IBAction func scoreButton(_ sender: Any) {
     }
-    
 }

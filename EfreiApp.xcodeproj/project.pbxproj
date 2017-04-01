@@ -16,6 +16,8 @@
 		38133E791E2FA60D00506871 /* EfreiAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38133E781E2FA60D00506871 /* EfreiAppTests.swift */; };
 		38133E841E2FA60D00506871 /* EfreiAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38133E831E2FA60D00506871 /* EfreiAppUITests.swift */; };
 		381A06F41E6591CE00F6BAA3 /* TaskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381A06F31E6591CE00F6BAA3 /* TaskDetailViewController.swift */; };
+		3826EE9E1E82CE5E0000CBDB /* AsksArroundTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3826EE9D1E82CE5E0000CBDB /* AsksArroundTableViewCell.swift */; };
+		383B6BFA1E899B40007B64F7 /* FoldingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383B6BF91E899B40007B64F7 /* FoldingCell.swift */; };
 		3878090A1E2FA81B00E44CD2 /* EZSwipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387809081E2FA81B00E44CD2 /* EZSwipeController.swift */; };
 		3878090B1E2FA81B00E44CD2 /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387809091E2FA81B00E44CD2 /* MenuVC.swift */; };
 		3878090D1E2FAA5400E44CD2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3878090C1E2FAA5400E44CD2 /* LoginViewController.swift */; };
@@ -26,10 +28,15 @@
 		388067AF1E2FB02200DB26A0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 388067AE1E2FB02200DB26A0 /* GoogleService-Info.plist */; };
 		388067B11E2FB36100DB26A0 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388067B01E2FB36100DB26A0 /* MainViewController.swift */; };
 		388067B71E2FBC7C00DB26A0 /* keyboardUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388067B61E2FBC7C00DB26A0 /* keyboardUtils.swift */; };
-		389984D71E6A07DB0023ECBF /* MainProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389984D61E6A07DB0023ECBF /* MainProfileViewController.swift */; };
+		388A84D51E6F3388001AD6DB /* SkillsSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388A84D41E6F3388001AD6DB /* SkillsSelectionViewController.swift */; };
+		3890456A1E8BE8380092F276 /* OtherUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389045691E8BE8380092F276 /* OtherUserViewController.swift */; };
+		3890456C1E8BFF5D0092F276 /* CustomSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3890456B1E8BFF5D0092F276 /* CustomSegue.swift */; };
+		3890456E1E8D9BB90092F276 /* time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3890456D1E8D9BB90092F276 /* time.swift */; };
+		389984D71E6A07DB0023ECBF /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389984D61E6A07DB0023ECBF /* ProfileViewController.swift */; };
 		389984DB1E6A285D0023ECBF /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389984DA1E6A285D0023ECBF /* ScoreViewController.swift */; };
 		389984DF1E6A30D90023ECBF /* DeviceInfos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389984DE1E6A30D90023ECBF /* DeviceInfos.swift */; };
 		389984E11E6B32580023ECBF /* AvailabilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389984E01E6B32580023ECBF /* AvailabilityViewController.swift */; };
+		38C9A6181E749D4700A7786E /* SkillCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C9A6171E749D4700A7786E /* SkillCollectionViewCell.swift */; };
 		38CF80A01E4F804200FB3F08 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38CF809F1E4F804200FB3F08 /* Location.swift */; };
 		38E0D6271E6071B40008A5B9 /* Ask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E0D6261E6071B40008A5B9 /* Ask.swift */; };
 		38E0D6291E60778F0008A5B9 /* askViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E0D6281E60778F0008A5B9 /* askViewController.swift */; };
@@ -75,6 +82,8 @@
 		38133E831E2FA60D00506871 /* EfreiAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EfreiAppUITests.swift; sourceTree = "<group>"; };
 		38133E851E2FA60D00506871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		381A06F31E6591CE00F6BAA3 /* TaskDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailViewController.swift; sourceTree = "<group>"; };
+		3826EE9D1E82CE5E0000CBDB /* AsksArroundTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsksArroundTableViewCell.swift; sourceTree = "<group>"; };
+		383B6BF91E899B40007B64F7 /* FoldingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoldingCell.swift; sourceTree = "<group>"; };
 		387809081E2FA81B00E44CD2 /* EZSwipeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EZSwipeController.swift; sourceTree = "<group>"; };
 		387809091E2FA81B00E44CD2 /* MenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuVC.swift; sourceTree = "<group>"; };
 		3878090C1E2FAA5400E44CD2 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -85,10 +94,15 @@
 		388067AE1E2FB02200DB26A0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		388067B01E2FB36100DB26A0 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		388067B61E2FBC7C00DB26A0 /* keyboardUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = keyboardUtils.swift; sourceTree = "<group>"; };
-		389984D61E6A07DB0023ECBF /* MainProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainProfileViewController.swift; sourceTree = "<group>"; };
+		388A84D41E6F3388001AD6DB /* SkillsSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillsSelectionViewController.swift; sourceTree = "<group>"; };
+		389045691E8BE8380092F276 /* OtherUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUserViewController.swift; sourceTree = "<group>"; };
+		3890456B1E8BFF5D0092F276 /* CustomSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSegue.swift; sourceTree = "<group>"; };
+		3890456D1E8D9BB90092F276 /* time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = time.swift; sourceTree = "<group>"; };
+		389984D61E6A07DB0023ECBF /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		389984DA1E6A285D0023ECBF /* ScoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
 		389984DE1E6A30D90023ECBF /* DeviceInfos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceInfos.swift; sourceTree = "<group>"; };
 		389984E01E6B32580023ECBF /* AvailabilityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvailabilityViewController.swift; sourceTree = "<group>"; };
+		38C9A6171E749D4700A7786E /* SkillCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillCollectionViewCell.swift; sourceTree = "<group>"; };
 		38CF809F1E4F804200FB3F08 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		38E0D6261E6071B40008A5B9 /* Ask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ask.swift; sourceTree = "<group>"; };
 		38E0D6281E60778F0008A5B9 /* askViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = askViewController.swift; sourceTree = "<group>"; };
@@ -167,13 +181,16 @@
 				38FA09A91E3277AC00C5A9F0 /* EfreiApp.entitlements */,
 				38133E631E2FA60D00506871 /* AppDelegate.swift */,
 				38133E651E2FA60D00506871 /* ViewController.swift */,
+				389984DE1E6A30D90023ECBF /* DeviceInfos.swift */,
+				388067B61E2FBC7C00DB26A0 /* keyboardUtils.swift */,
+				3890456B1E8BFF5D0092F276 /* CustomSegue.swift */,
+				3890456D1E8D9BB90092F276 /* time.swift */,
 				381A06F61E659B1F00F6BAA3 /* Navigation */,
 				381A06F91E659B6300F6BAA3 /* Login */,
 				381A06F81E659B5A00F6BAA3 /* MainView */,
 				38E0D62A1E6077980008A5B9 /* Ask */,
 				381A06F71E659B3F00F6BAA3 /* Location */,
 				38E41B181E69CE780090FB81 /* User */,
-				388067B61E2FBC7C00DB26A0 /* keyboardUtils.swift */,
 				38E0D6251E60718A0008A5B9 /* WalkThrough */,
 				38133E671E2FA60D00506871 /* Main.storyboard */,
 				388067A81E2FAF9100DB26A0 /* Walkthrough.storyboard */,
@@ -232,7 +249,6 @@
 		381A06F81E659B5A00F6BAA3 /* MainView */ = {
 			isa = PBXGroup;
 			children = (
-				389984DE1E6A30D90023ECBF /* DeviceInfos.swift */,
 				388067B01E2FB36100DB26A0 /* MainViewController.swift */,
 			);
 			name = MainView;
@@ -242,6 +258,8 @@
 			isa = PBXGroup;
 			children = (
 				3878090C1E2FAA5400E44CD2 /* LoginViewController.swift */,
+				388A84D41E6F3388001AD6DB /* SkillsSelectionViewController.swift */,
+				38C9A6171E749D4700A7786E /* SkillCollectionViewCell.swift */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -279,7 +297,7 @@
 			isa = PBXGroup;
 			children = (
 				389984E01E6B32580023ECBF /* AvailabilityViewController.swift */,
-				389984D61E6A07DB0023ECBF /* MainProfileViewController.swift */,
+				389984D61E6A07DB0023ECBF /* ProfileViewController.swift */,
 				389984DA1E6A285D0023ECBF /* ScoreViewController.swift */,
 				38FA09A51E32765700C5A9F0 /* User.swift */,
 			);
@@ -299,7 +317,10 @@
 			isa = PBXGroup;
 			children = (
 				38F13DA01E61E3990081028F /* AsksArroundViewController.swift */,
+				3826EE9D1E82CE5E0000CBDB /* AsksArroundTableViewCell.swift */,
 				38F13DA21E61E58B0081028F /* AsksArround.swift */,
+				383B6BF91E899B40007B64F7 /* FoldingCell.swift */,
+				389045691E8BE8380092F276 /* OtherUserViewController.swift */,
 			);
 			name = Search;
 			sourceTree = "<group>";
@@ -400,7 +421,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0820;
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "Paul Bénéteau";
 				TargetAttributes = {
 					38133E5F1E2FA60D00506871 = {
@@ -626,6 +647,7 @@
 				388067AD1E2FAFB100DB26A0 /* CustomPageViewController.swift in Sources */,
 				388067A71E2FAF1100DB26A0 /* Transition.swift in Sources */,
 				3878090A1E2FA81B00E44CD2 /* EZSwipeController.swift in Sources */,
+				388A84D51E6F3388001AD6DB /* SkillsSelectionViewController.swift in Sources */,
 				3878090B1E2FA81B00E44CD2 /* MenuVC.swift in Sources */,
 				388067B71E2FBC7C00DB26A0 /* keyboardUtils.swift in Sources */,
 				38133E661E2FA60D00506871 /* ViewController.swift in Sources */,
@@ -638,12 +660,18 @@
 				388067B11E2FB36100DB26A0 /* MainViewController.swift in Sources */,
 				38FA09A61E32765700C5A9F0 /* User.swift in Sources */,
 				388067AB1E2FAFA000DB26A0 /* WalkThroughViewController.swift in Sources */,
+				3890456E1E8D9BB90092F276 /* time.swift in Sources */,
 				38E41B141E69B1760090FB81 /* UserAsksViewController.swift in Sources */,
+				3890456A1E8BE8380092F276 /* OtherUserViewController.swift in Sources */,
 				38E0D6291E60778F0008A5B9 /* askViewController.swift in Sources */,
+				38C9A6181E749D4700A7786E /* SkillCollectionViewCell.swift in Sources */,
+				3826EE9E1E82CE5E0000CBDB /* AsksArroundTableViewCell.swift in Sources */,
 				38E0D6271E6071B40008A5B9 /* Ask.swift in Sources */,
+				383B6BFA1E899B40007B64F7 /* FoldingCell.swift in Sources */,
 				38F13DA31E61E58B0081028F /* AsksArround.swift in Sources */,
 				38133E641E2FA60D00506871 /* AppDelegate.swift in Sources */,
-				389984D71E6A07DB0023ECBF /* MainProfileViewController.swift in Sources */,
+				389984D71E6A07DB0023ECBF /* ProfileViewController.swift in Sources */,
+				3890456C1E8BFF5D0092F276 /* CustomSegue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

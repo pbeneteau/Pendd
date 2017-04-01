@@ -20,7 +20,11 @@ target 'EfreiApp' do
   pod 'Spring', :git => 'https://github.com/MengTo/Spring.git', :branch => 'swift3'
   pod 'M13Checkbox'
   pod 'SkyFloatingLabelTextField'
-  
+  pod 'DGElasticPullToRefresh'
+  pod 'YALSideMenu'
+  pod 'Cosmos'
+  pod 'PhoneNumberKit'
+
   target 'EfreiAppTests' do
     inherit! :search_paths
     # Pods for testing

@@ -7,20 +7,46 @@
 //
 
 import UIKit
+import CoreLocation
 
-struct asksArround{
+struct asksArround {
     
-    var date: String?
-    var type: String?
-    var distance: Double?
+    var title: String?
+    var description: String?
+    var distance: Int?
     var address: String?
-    var nsDate: String?
+    var street: String!
+    var date: String?
+    var category: String?
+    var categoryEnum: Category
+    var price: String?
+    var location: CLLocation!
+    var user: String!
     
-    init ( date : String, type : String, distance: Double, address: String, nsDate: String) {
+    enum Category: String {
+        case All
+        case task1 = "task 1"
+        case task2 = "task 2"
+        case task3 = "task 3"
+        case task4 = "task 4"
+        case task5 = "task 5"
+        case task6 = "task 6"
+        case task7 = "task 7"
+        case task8 = "task 8"
+        case task9 = "task 9"
+    }
+    
+    init(title : String, description: String, distance: Int, address: String, street: String, date: String, category: String, price : String, location: CLLocation, user: String) {
         self.date = date
-        self.type = type
+        self.title = title
+        self.description = description
         self.distance = distance
         self.address = address
-        self.nsDate = nsDate
+        self.street = street
+        self.category = category
+        self.price = price
+        self.categoryEnum = Category(rawValue: category)!
+        self.location = location
+        self.user = user
     }
 }

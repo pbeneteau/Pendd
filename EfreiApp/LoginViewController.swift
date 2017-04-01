@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import NVActivityIndicatorView
 import CoreLocation
+import PhoneNumberKit
 
 class LoginViewController: keyboardUtils, NVActivityIndicatorViewable {
     
@@ -17,7 +18,7 @@ class LoginViewController: keyboardUtils, NVActivityIndicatorViewable {
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var nameField: UITextField!
-    @IBOutlet weak var telField: UITextField!
+    @IBOutlet weak var telField = PhoneNumberTextField()
     @IBOutlet weak var adressField: UITextField!
     @IBOutlet weak var lastNameField: UITextField!
     @IBOutlet weak var zipcodeField: UITextField!
@@ -48,10 +49,13 @@ class LoginViewController: keyboardUtils, NVActivityIndicatorViewable {
     
     let keyboardClass = keyboardUtils!.self
     
+    let phoneNumberKit = PhoneNumberKit()
+    var dialingCode: String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if ( user != nil) {
+        if user != nil {
             // if user already logged in...
             transitionSegue.segue.switchToNavigationController()
         }
@@ -61,6 +65,10 @@ class LoginViewController: keyboardUtils, NVActivityIndicatorViewable {
         
         initButtons()
         
+        if let countryCode = (Locale.current as NSLocale).object(forKey: .countryCode) as? String {
+            dialingCode = String(describing: phoneNumberKit.countryCode(for: countryCode)!)
+        }
+        
         setPredictiveState(state: .no)
         
         initSwipe(initView: signInView)
@@ -69,7 +77,7 @@ class LoginViewController: keyboardUtils, NVActivityIndicatorViewable {
         addObservers()
         
         // delegates for textFields
-        setDelegates(nameField, emailField, passwordField, loginEmailField,  loginPasswordField, telField, adressField, countryField, lastNameField, zipcodeField)
+        setDelegates(nameField, emailField, passwordField, loginEmailField,  loginPasswordField, telField!, adressField, countryField, lastNameField, zipcodeField)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -148,7 +156,7 @@ class LoginViewController: keyboardUtils, NVActivityIndicatorViewable {
     @IBAction func signInButtonAction(_ sender: Any) {
         dismissKeyboard()
         
-        if ((emailField.text == "") || (passwordField.text == "") || (nameField.text == "") || (telField.text == "") || (adressField.text == "") || (countryField.text == "") || (zipcodeField.text == "") || (lastNameField.text == "") || state == ""){
+        if ((emailField.text == "") || (passwordField.text == "") || (nameField.text == "") || (telField?.text == "") || (telField?.text == "+\(dialingCode!) ") || (adressField.text == "") || (countryField.text == "") || (zipcodeField.text == "") || (lastNameField.text == "") || state == ""){
             
             messageAlert(title: "Error!", message: "Please enter all informations needed")
             
@@ -162,12 +170,16 @@ class LoginViewController: keyboardUtils, NVActivityIndicatorViewable {
                     self.ref.child("users").child(user!.uid).child("firstName").setValue(self.nameField.text)
                     self.ref.child("users").child(user!.uid).child("lastName").setValue(self.lastNameField.text)
                     self.ref.child("users").child(user!.uid).child("email").setValue(self.emailField.text)
-                    self.ref.child("users").child(user!.uid).child("tel").setValue(self.telField.text)
+                    
+                    
+                    self.ref.child("users").child(user!.uid).child("tel").setValue(PartialFormatter().formatPartial((self.telField?.text)!))
                     self.ref.child("users").child(user!.uid).child("address").setValue(self.adressField.text)
                     self.ref.child("users").child(user!.uid).child("zipCode").setValue(self.zipcodeField.text)
                     self.ref.child("users").child(user!.uid).child("country").setValue(self.countryField.text)
                     self.ref.child("users").child(user!.uid).child("state").setValue(self.state)
-                   
+                    self.ref.child("users").child(user!.uid).child("address").setValue("\(String(describing: self.countryField.text!)), \(self.state) \(String(describing: self.zipcodeField.text!))")
+                    self.ref.child("users").child(user!.uid).child("street").setValue("\(String(describing: self.adressField.text!))")
+                    
                     // Send other default infos
                     let days = ["monday", "tuesday", "wednesday", "friday", "thursday", "saturday", "sunday", "mondayAm", "tuesdayAm", "wednesdayAm", "fridayAm", "thursdayAm", "saturdayAm", "sundayAm"]
                     
@@ -176,9 +188,9 @@ class LoginViewController: keyboardUtils, NVActivityIndicatorViewable {
                     }
                     self.ref.child("users").child((user?.uid)!).child("mark").setValue(0)
                     self.ref.child("users").child((user?.uid)!).child("totalHelps").setValue(0)
+                    self.ref.child("users").child((user?.uid)!).child("rates").setValue(0)
                     
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "MenuVC")
-                    self.present(vc!, animated: true, completion: nil)
+                    transitionSegue.segue.switchToNavigationController()
                     
                 } else {
                     
@@ -190,7 +202,6 @@ class LoginViewController: keyboardUtils, NVActivityIndicatorViewable {
                 })
             }
         }
-        
     }
     
     // Login
@@ -227,7 +238,7 @@ class LoginViewController: keyboardUtils, NVActivityIndicatorViewable {
     @IBAction func resetPassword(_ sender: Any) {
         
         if self.loginEmailField.text == "" {
-
+            
             messageAlert(title: "Oops!", message: "Please enter an email.")
             
         } else {
@@ -236,7 +247,7 @@ class LoginViewController: keyboardUtils, NVActivityIndicatorViewable {
                 
                 if error != nil {
                     self.messageAlert(title: "Error!", message: (error?.localizedDescription)!)
-
+                    
                 } else {
                     self.messageAlert(title: "Sucess!", message: "A mail have been sent.")
                     self.loginEmailField.text = ""
@@ -246,7 +257,7 @@ class LoginViewController: keyboardUtils, NVActivityIndicatorViewable {
     }
     
     func messageAlert(title: String, message: String) {
-       
+        
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
         let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
@@ -334,5 +345,9 @@ class LoginViewController: keyboardUtils, NVActivityIndicatorViewable {
                 print(self.state)
             }
         }
+    }
+    @IBAction func phoneNumberBeginEdited(_ sender: Any) {
+        self.telField?.placeholder = "+\(self.dialingCode!) "
+        
     }
 }

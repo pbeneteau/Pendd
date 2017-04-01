@@ -27,13 +27,12 @@ class locationHelp {
     private var state: String!
     private var address: String!
     private var userHomeLocationAsk: CLLocation!
-    
+    private var street: String!
     
     // Location
     func setLocation(completionHandler: @escaping (_ success: Bool ) -> ()) {
         
         updateUserLocation { locationFound in
-            print(locationFound)
             self.getLocationDetails(location1: locationFound) { success in
                 if success {
                     print("success in settings locations details")
@@ -49,6 +48,7 @@ class locationHelp {
         _ = Location.reverse(coordinates: location1.coordinate, onSuccess: { foundPlacemark in
             self.city = foundPlacemark.locality
             self.countryCode = foundPlacemark.isoCountryCode
+            print(self.countryCode)
             self.postalCode = foundPlacemark.postalCode
             self.state = foundPlacemark.administrativeArea
             completionHandler(true)
@@ -89,8 +89,19 @@ class locationHelp {
         
         userRef.observeSingleEvent(of: .value, with: { (snapshot) -> Void in
             let address = JSON(snapshot.value!)["address"].stringValue
-            self.address = address
             completionHandler(address)
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+    }
+    
+    func retrieveUserDatabaseStreet(userID: String, completionHandler: @escaping (_ street: String) -> ()) {
+        
+        let userRef = ref.child("users").child(userID)
+        
+        userRef.observeSingleEvent(of: .value, with: { (snapshot) -> Void in
+            let street = JSON(snapshot.value!)["street"].stringValue
+            completionHandler(street)
         }) { (error) in
             print(error.localizedDescription)
         }
