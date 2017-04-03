@@ -49,16 +49,17 @@ class AskHelp: AnyObject {
         
         print("Sending ask data...")
         
-        let dict = ["price" : "\(price)", "date": "\(date)", "user": "\((user?.uid)!)", "address": "\(address)", "street": "\(street)", "userIsAtHome": "\(userIsAtHome)", "category": "\(task)", "description": "\(descriptionText)", "title" : "\(title)"]
+        let dict = ["price" : "\(price)", "date": "\(date)", "user": "\((user?.uid)!)", "address": "\(address)", "street": "\(street)", "userIsAtHome": "\(userIsAtHome)", "category": "\(task)", "description": "\(descriptionText)", "title" : "\(title)", "requests" : "0"]
         
-        
+        // Send data in global asks directory
         for info in dict {
             ref.child("asks").child(countryCode).child(state).child(task).child(taskKey).child("\(info.key)").setValue("\(info.value)")
         }
+        
+        // Send data in user asks directory
          for info in dict {
             ref.child("users").child((user?.uid)!).child("asks").child(taskKey).child("\(info)").setValue("\(info.value)")
         }
-
         print("Done")
     }
     

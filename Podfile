@@ -24,6 +24,7 @@ target 'EfreiApp' do
   pod 'YALSideMenu'
   pod 'Cosmos'
   pod 'PhoneNumberKit'
+  pod 'DynamicButton'
 
   target 'EfreiAppTests' do
     inherit! :search_paths

@@ -33,27 +33,40 @@ class locationHelp {
     func setLocation(completionHandler: @escaping (_ success: Bool ) -> ()) {
         
         updateUserLocation { locationFound in
+            print(locationFound)
             self.getLocationDetails(location1: locationFound) { success in
                 if success {
-                    print("success in settings locations details")
+                    print("success in getting location details")
                     completionHandler(true)
+                } else {
+                    completionHandler(false)
                 }
             }
         }
     }
     
     // Get current user City, PostalCode and Country code
-    func getLocationDetails(location1: CLLocation, completionHandler: @escaping (_ success: Bool) -> ()) {
+    func getLocationDetails(location1: CLLocation, completionHandler: @escaping (_ state: Bool) -> ()) {
         
         _ = Location.reverse(coordinates: location1.coordinate, onSuccess: { foundPlacemark in
-            self.city = foundPlacemark.locality
-            self.countryCode = foundPlacemark.isoCountryCode
-            print(self.countryCode)
-            self.postalCode = foundPlacemark.postalCode
-            self.state = foundPlacemark.administrativeArea
-            completionHandler(true)
+            
+            if let countryCode = foundPlacemark.isoCountryCode {
+                self.countryCode = countryCode
+            }
+            if let postalCode = foundPlacemark.postalCode {
+                self.postalCode = postalCode
+            }
+            if let state = foundPlacemark.administrativeArea {
+                self.state = state
+            }
+            if self.countryCode != "" && self.postalCode != "" && self.state != "" {
+                print(self.state)
+                completionHandler(true)
+            }
+            
         }) { error in
             print("Error: \(error)")
+            completionHandler(false)
         }
     }
     
@@ -137,7 +150,7 @@ class locationHelp {
         return location.coordinate.latitude
     }
     func getLong() -> CLLocationDegrees{
- 
+        
         return location.coordinate.longitude
     }
     func getUserHomeLocation() -> CLLocation  {

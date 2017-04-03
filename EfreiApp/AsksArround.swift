@@ -22,6 +22,7 @@ struct asksArround {
     var price: String?
     var location: CLLocation!
     var user: String!
+    var requests: String!
     
     enum Category: String {
         case All
@@ -36,7 +37,7 @@ struct asksArround {
         case task9 = "task 9"
     }
     
-    init(title : String, description: String, distance: Int, address: String, street: String, date: String, category: String, price : String, location: CLLocation, user: String) {
+    init(title : String, description: String, distance: Int, address: String, street: String, date: String, category: String, price : String, location: CLLocation, user: String, requests : String) {
         self.date = date
         self.title = title
         self.description = description
@@ -48,5 +49,6 @@ struct asksArround {
         self.categoryEnum = Category(rawValue: category)!
         self.location = location
         self.user = user
+        self.requests  = requests
     }
 }

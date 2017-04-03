@@ -78,6 +78,10 @@ class LoginViewController: keyboardUtils, NVActivityIndicatorViewable {
         
         // delegates for textFields
         setDelegates(nameField, emailField, passwordField, loginEmailField,  loginPasswordField, telField!, adressField, countryField, lastNameField, zipcodeField)
+        
+        if let savedValue = UserDefaults.standard.string(forKey: "loginUserMailSaved") {
+            self.loginEmailField.text = savedValue
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -104,6 +108,7 @@ class LoginViewController: keyboardUtils, NVActivityIndicatorViewable {
     func initButtons() {
         
         aiView = NVActivityIndicatorView(frame: CGRect(x: x, y: 594.5, width: 50, height: 50))
+        
         self.SignUpButton.setTitle("Sign Up", for: .normal)
         self.SignInButton.setTitle("Sign In", for: .normal)
         self.SignUpButton.frame.size.width = 296
@@ -124,7 +129,7 @@ class LoginViewController: keyboardUtils, NVActivityIndicatorViewable {
     func buttonLoadingAnimation() {
         
         UIView.animateKeyframes(withDuration: 0.4, delay: 0, options: .allowUserInteraction, animations: {
-            
+            print("azd")
             self.SignUpButton.layer.cornerRadius = 30
             self.SignUpButton.frame.size.width = 59
             self.SignUpButton.frame.origin.x = self.x - 4.5
@@ -136,7 +141,8 @@ class LoginViewController: keyboardUtils, NVActivityIndicatorViewable {
             self.SignInButton.setTitle("", for: .normal)
         })
         
-        aiView.color = .white
+        aiView.color = UIColor(red:0.26, green:0.29, blue:0.63, alpha:1.0)
+        
         aiView.type = .ballScaleMultiple
         aiView.startAnimating()
         view.addSubview(aiView)
@@ -161,17 +167,17 @@ class LoginViewController: keyboardUtils, NVActivityIndicatorViewable {
             messageAlert(title: "Error!", message: "Please enter all informations needed")
             
         } else {
+            self.buttonLoadingAnimation()
             FIRAuth.auth()?.createUser(withEmail: emailField.text!, password: passwordField.text!) { (user, error) in
                 
                 if error == nil {
-                    self.buttonLoadingAnimation()
+                    
+                    UserDefaults.standard.set(self.emailField.text!, forKey: "loginUserMailSaved")
                     
                     // Send data
                     self.ref.child("users").child(user!.uid).child("firstName").setValue(self.nameField.text)
                     self.ref.child("users").child(user!.uid).child("lastName").setValue(self.lastNameField.text)
                     self.ref.child("users").child(user!.uid).child("email").setValue(self.emailField.text)
-                    
-                    
                     self.ref.child("users").child(user!.uid).child("tel").setValue(PartialFormatter().formatPartial((self.telField?.text)!))
                     self.ref.child("users").child(user!.uid).child("address").setValue(self.adressField.text)
                     self.ref.child("users").child(user!.uid).child("zipCode").setValue(self.zipcodeField.text)
@@ -206,19 +212,24 @@ class LoginViewController: keyboardUtils, NVActivityIndicatorViewable {
     
     // Login
     @IBAction func loginButton(_ sender: Any) {
+        
         dismissKeyboard()
+        self.buttonLoadingAnimation()
         
         if self.loginEmailField.text == "" || self.loginPasswordField.text == "" {
-            
-            //Alert to tell the user that there was an error because they didn't fill anything in the textfields because they didn't fill anything in
+
             messageAlert(title: "Error!", message: "Please enter your password and email")
             
         } else {
             
             FIRAuth.auth()?.signIn(withEmail: self.loginEmailField.text!, password: self.loginPasswordField.text!) { (user, error) in
                 
+                
+                UserDefaults.standard.set(self.loginEmailField.text!, forKey: "loginUserMailSaved")
+                
+                
                 if error == nil {
-                    self.buttonLoadingAnimation()
+                    
                     //Go to the HomeViewController if the login is sucessful
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "MenuVC")
                     self.present(vc!, animated: true, completion: nil)
@@ -228,9 +239,9 @@ class LoginViewController: keyboardUtils, NVActivityIndicatorViewable {
                     self.messageAlert(title: "Error", message: (error?.localizedDescription)!)
                 }
                 self.aiView.stopAnimating()
-                UIView.animateKeyframes(withDuration: 0.4, delay: 0, options: .allowUserInteraction, animations: {
-                    self.initButtons()
-                })
+                
+                self.initButtons()
+                
             }
         }
     }
@@ -288,6 +299,7 @@ class LoginViewController: keyboardUtils, NVActivityIndicatorViewable {
         UIView.animateKeyframes(withDuration: 0.25, delay: 0, options: .allowUserInteraction, animations: {
             
             if self.actualView == "signin" {
+                
                 self.actualView = "login"
                 self.selectionBar.frame.origin.x += 185.5
                 if self.signInView.frame.origin.x != -439 {
@@ -298,6 +310,7 @@ class LoginViewController: keyboardUtils, NVActivityIndicatorViewable {
                 self.loginView.frame.origin.x -= 400.0
                 
             } else {
+                
                 self.actualView = "signin"
                 self.selectionBar.frame.origin.x -= 185.5
                 self.signInView.frame.origin.x += 400.0

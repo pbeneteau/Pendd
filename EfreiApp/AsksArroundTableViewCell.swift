@@ -34,6 +34,7 @@ class AsksArroundTableViewCell: FoldingCell, MKMapViewDelegate {
     @IBOutlet weak var userButton: UIButton!
     @IBOutlet weak var driveTimeLabel: UILabel!
     @IBOutlet weak var requestDeadlineLabel: UILabel!
+    @IBOutlet weak var requestsLabel: UILabel!
     
     @IBOutlet weak var mapContainerView: UIView!
     @IBOutlet weak var profileContainerView: RotatedView!
@@ -168,7 +169,7 @@ class AsksArroundTableViewCell: FoldingCell, MKMapViewDelegate {
             
             let route = response.routes[0]
             
-            self.driveTimeLabel.text = "\(Int(route.expectedTravelTime/60)) min drive"
+            self.driveTimeLabel.text = "\(Int(route.expectedTravelTime/60)) minutes"
             
             self.mapView.add((route.polyline), level: MKOverlayLevel.aboveRoads)
             
@@ -219,22 +220,25 @@ class AsksArroundTableViewCell: FoldingCell, MKMapViewDelegate {
         profileContainerY = profileContainerView.frame.origin.y
         
         UIView.animateKeyframes(withDuration: 0.4, delay: 0, options: .allowUserInteraction, animations: {
-            self.infosBarView.alpha = 0
             self.mapView.frame.size.height = 200
-            self.profileContainerView.frame.origin.y = 235
+            self.profileContainerView.frame.origin.y += 80
             self.moreInfo.isHidden = true
+            self.infosBarView.frame.origin.y += 80
+            self.infosBarView.alpha = 0
+
+
         })
     }
     
     @IBAction func closeDetailsButton(_ sender: Any) {
         UIView.animateKeyframes(withDuration: 0.4, delay: 0, options: .allowUserInteraction, animations: {
             self.mapView.frame.size.height = self.mapHeight
-            
             self.profileContainerView.frame.origin.y = self.profileContainerY
             self.moreInfo.isHidden = false
         })
         
         UIView.animateKeyframes(withDuration: 0.4, delay: 0.4, options: .allowUserInteraction, animations: {
+            self.infosBarView.frame.origin.y -= 80
             self.infosBarView.alpha = 1
         })
     }

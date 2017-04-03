@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E01E53E0F70BE2A729763AA336E005F2"
+               BlueprintIdentifier = "C61BAA887CE9496B82FC37286EDE2E9D"
                BuildableName = "Pods_EfreiApp.framework"
                BlueprintName = "Pods-EfreiApp"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E01E53E0F70BE2A729763AA336E005F2"
+            BlueprintIdentifier = "C61BAA887CE9496B82FC37286EDE2E9D"
             BuildableName = "Pods_EfreiApp.framework"
             BlueprintName = "Pods-EfreiApp"
             ReferencedContainer = "container:Pods.xcodeproj">

@@ -16,6 +16,7 @@
 		38133E791E2FA60D00506871 /* EfreiAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38133E781E2FA60D00506871 /* EfreiAppTests.swift */; };
 		38133E841E2FA60D00506871 /* EfreiAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38133E831E2FA60D00506871 /* EfreiAppUITests.swift */; };
 		381A06F41E6591CE00F6BAA3 /* TaskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381A06F31E6591CE00F6BAA3 /* TaskDetailViewController.swift */; };
+		381BE37B1E90007B006FFC05 /* MapUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381BE37A1E90007B006FFC05 /* MapUIViewController.swift */; };
 		3826EE9E1E82CE5E0000CBDB /* AsksArroundTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3826EE9D1E82CE5E0000CBDB /* AsksArroundTableViewCell.swift */; };
 		383B6BFA1E899B40007B64F7 /* FoldingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383B6BF91E899B40007B64F7 /* FoldingCell.swift */; };
 		3878090A1E2FA81B00E44CD2 /* EZSwipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387809081E2FA81B00E44CD2 /* EZSwipeController.swift */; };
@@ -82,6 +83,7 @@
 		38133E831E2FA60D00506871 /* EfreiAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EfreiAppUITests.swift; sourceTree = "<group>"; };
 		38133E851E2FA60D00506871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		381A06F31E6591CE00F6BAA3 /* TaskDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailViewController.swift; sourceTree = "<group>"; };
+		381BE37A1E90007B006FFC05 /* MapUIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapUIViewController.swift; sourceTree = "<group>"; };
 		3826EE9D1E82CE5E0000CBDB /* AsksArroundTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsksArroundTableViewCell.swift; sourceTree = "<group>"; };
 		383B6BF91E899B40007B64F7 /* FoldingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoldingCell.swift; sourceTree = "<group>"; };
 		387809081E2FA81B00E44CD2 /* EZSwipeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EZSwipeController.swift; sourceTree = "<group>"; };
@@ -321,6 +323,7 @@
 				38F13DA21E61E58B0081028F /* AsksArround.swift */,
 				383B6BF91E899B40007B64F7 /* FoldingCell.swift */,
 				389045691E8BE8380092F276 /* OtherUserViewController.swift */,
+				381BE37A1E90007B006FFC05 /* MapUIViewController.swift */,
 			);
 			name = Search;
 			sourceTree = "<group>";
@@ -669,6 +672,7 @@
 				38E0D6271E6071B40008A5B9 /* Ask.swift in Sources */,
 				383B6BFA1E899B40007B64F7 /* FoldingCell.swift in Sources */,
 				38F13DA31E61E58B0081028F /* AsksArround.swift in Sources */,
+				381BE37B1E90007B006FFC05 /* MapUIViewController.swift in Sources */,
 				38133E641E2FA60D00506871 /* AppDelegate.swift in Sources */,
 				389984D71E6A07DB0023ECBF /* ProfileViewController.swift in Sources */,
 				3890456C1E8BFF5D0092F276 /* CustomSegue.swift in Sources */,

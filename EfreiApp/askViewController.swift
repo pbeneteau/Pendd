@@ -62,29 +62,32 @@ class askViewController: keyboardUtils, UIPickerViewDelegate, UIPickerViewDataSo
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         tap.delegate = self
         view.isUserInteractionEnabled = true
         view.addGestureRecognizer(tap)
-        
-        
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         removeObservers()
-        
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         stopAnimating()
     }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
     
     func initLocationDetails() {
+        
         locationClass.setLocation { success in
             if success {
                 self.locationClass.retrieveUserDatabaseAdress(userID: (self.user?.uid)!) { address in
@@ -117,17 +120,22 @@ class askViewController: keyboardUtils, UIPickerViewDelegate, UIPickerViewDataSo
     }
     
     func initTaskPicker() {
-        getTaskList { success in }
+        getTaskList { finished in
+            if finished {
+                self.taskPicker.reloadAllComponents()
+            }
+        }
     }
     
     // Task picker initialisation
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
+    
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        
         return pickerData.count
     }
+    
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return pickerData[row]
     }
@@ -148,7 +156,6 @@ class askViewController: keyboardUtils, UIPickerViewDelegate, UIPickerViewDataSo
             completionHandler(true)
         }) { (error) in
             print(error.localizedDescription)
-            completionHandler(false)
         }
     }
     
@@ -158,6 +165,7 @@ class askViewController: keyboardUtils, UIPickerViewDelegate, UIPickerViewDataSo
         if (AskClass.checkUserLocationHome(currentLocation: userLocation, homeLocation: homeLocation) == true) {
             
             AskClass.sendData(price: price, task: task, date: date, address: address, street: street, countryCode: countryCode, state: state, userIsAtHome: true, descriptionText: descriptionText, title: title)
+            dismiss(animated: true, completion: nil)
             
         } else {
             
