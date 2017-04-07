@@ -44,7 +44,7 @@ class MainViewController: UIViewController, NVActivityIndicatorViewable {
 
             
             if user == nil {
-                transitionSegue.segue.switchToLoginview()
+                TransitionSegue.segue.switchToLoginview()
                 disconnectButton(Any.self)
             }
         }

@@ -57,7 +57,7 @@ class LoginViewController: keyboardUtils, NVActivityIndicatorViewable {
         
         if user != nil {
             // if user already logged in...
-            transitionSegue.segue.switchToNavigationController()
+            TransitionSegue.segue.switchToNavigationController()
         }
         
         loginView.frame.origin.x = 39.5
@@ -196,7 +196,7 @@ class LoginViewController: keyboardUtils, NVActivityIndicatorViewable {
                     self.ref.child("users").child((user?.uid)!).child("totalHelps").setValue(0)
                     self.ref.child("users").child((user?.uid)!).child("rates").setValue(0)
                     
-                    transitionSegue.segue.switchToNavigationController()
+                    TransitionSegue.segue.switchToNavigationController()
                     
                 } else {
                     

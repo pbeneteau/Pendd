@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>ArialHB</string>
+	</array>
 	<key>NSCalendarsUsageDescription</key>
 	<string>We need this to save events in your calendar</string>
 	<key>NSPhotoLibraryUsageDescription</key>

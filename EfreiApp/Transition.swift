@@ -10,8 +10,8 @@ import Foundation
 import FirebaseAuth
 import UIKit
 
-class transitionSegue {
-    static let segue = transitionSegue()
+class TransitionSegue {
+    static let segue = TransitionSegue()
     
      func switchToNavigationController() {
         
@@ -36,6 +36,20 @@ class transitionSegue {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.window?.rootViewController = naviVC
     }
+    
+    func switchToLoginView() {
+        
+        /*
+        guard let vc = UIStoryboard(name:"Main", bundle:nil).instantiateViewControllerWithIdentifier("identifier") as? SecondViewController else {
+            print("Could not instantiate view controller with identifier of type SecondViewController")
+            return
+        }
+        
+        vc.resultsArray = self.resultsArray
+        self.navigationController?.pushViewController(vc, animated:true)
+         */
+    }
+    
 }
 
 

@@ -54,6 +54,6 @@ class WalkThroughViewController: UIViewController, BWWalkthroughViewControllerDe
     }
     
     func walkthroughCloseButtonPressed() {
-        transitionSegue.segue.switchToNavigationController()
+        TransitionSegue.segue.switchToNavigationController()
     }
 }

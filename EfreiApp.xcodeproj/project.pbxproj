@@ -17,6 +17,7 @@
 		38133E841E2FA60D00506871 /* EfreiAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38133E831E2FA60D00506871 /* EfreiAppUITests.swift */; };
 		381A06F41E6591CE00F6BAA3 /* TaskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381A06F31E6591CE00F6BAA3 /* TaskDetailViewController.swift */; };
 		381BE37B1E90007B006FFC05 /* MapUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381BE37A1E90007B006FFC05 /* MapUIViewController.swift */; };
+		381BE37D1E925B09006FFC05 /* LoginEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381BE37C1E925B09006FFC05 /* LoginEmailViewController.swift */; };
 		3826EE9E1E82CE5E0000CBDB /* AsksArroundTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3826EE9D1E82CE5E0000CBDB /* AsksArroundTableViewCell.swift */; };
 		383B6BFA1E899B40007B64F7 /* FoldingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383B6BF91E899B40007B64F7 /* FoldingCell.swift */; };
 		3878090A1E2FA81B00E44CD2 /* EZSwipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387809081E2FA81B00E44CD2 /* EZSwipeController.swift */; };
@@ -45,6 +46,8 @@
 		38E41B171E69B1DC0090FB81 /* UserAsks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E41B161E69B1DC0090FB81 /* UserAsks.swift */; };
 		38F13DA11E61E3990081028F /* AsksArroundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F13DA01E61E3990081028F /* AsksArroundViewController.swift */; };
 		38F13DA31E61E58B0081028F /* AsksArround.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F13DA21E61E58B0081028F /* AsksArround.swift */; };
+		38F8A72B1E97926200F6C68E /* LoginViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F8A72A1E97926200F6C68E /* LoginViewUtils.swift */; };
+		38F8A72D1E97FB2300F6C68E /* ArialHB.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 38F8A72C1E97FAFA00F6C68E /* ArialHB.ttc */; };
 		38FA09A61E32765700C5A9F0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FA09A51E32765700C5A9F0 /* User.swift */; };
 		38FA09A81E32779C00C5A9F0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38FA09A71E32779C00C5A9F0 /* MapKit.framework */; };
 		8E3B3F05EA85DA41251F2257 /* Pods_EfreiAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D95C2264258AEBD408EA7F7 /* Pods_EfreiAppTests.framework */; };
@@ -84,6 +87,7 @@
 		38133E851E2FA60D00506871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		381A06F31E6591CE00F6BAA3 /* TaskDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailViewController.swift; sourceTree = "<group>"; };
 		381BE37A1E90007B006FFC05 /* MapUIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapUIViewController.swift; sourceTree = "<group>"; };
+		381BE37C1E925B09006FFC05 /* LoginEmailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginEmailViewController.swift; sourceTree = "<group>"; };
 		3826EE9D1E82CE5E0000CBDB /* AsksArroundTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsksArroundTableViewCell.swift; sourceTree = "<group>"; };
 		383B6BF91E899B40007B64F7 /* FoldingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoldingCell.swift; sourceTree = "<group>"; };
 		387809081E2FA81B00E44CD2 /* EZSwipeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EZSwipeController.swift; sourceTree = "<group>"; };
@@ -112,6 +116,8 @@
 		38E41B161E69B1DC0090FB81 /* UserAsks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAsks.swift; sourceTree = "<group>"; };
 		38F13DA01E61E3990081028F /* AsksArroundViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsksArroundViewController.swift; sourceTree = "<group>"; };
 		38F13DA21E61E58B0081028F /* AsksArround.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsksArround.swift; sourceTree = "<group>"; };
+		38F8A72A1E97926200F6C68E /* LoginViewUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewUtils.swift; sourceTree = "<group>"; };
+		38F8A72C1E97FAFA00F6C68E /* ArialHB.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = ArialHB.ttc; sourceTree = "<group>"; };
 		38FA09A51E32765700C5A9F0 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		38FA09A71E32779C00C5A9F0 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		38FA09A91E3277AC00C5A9F0 /* EfreiApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EfreiApp.entitlements; sourceTree = "<group>"; };
@@ -180,6 +186,7 @@
 		38133E621E2FA60D00506871 /* EfreiApp */ = {
 			isa = PBXGroup;
 			children = (
+				38F8A72E1E97FBBF00F6C68E /* Fonts */,
 				38FA09A91E3277AC00C5A9F0 /* EfreiApp.entitlements */,
 				38133E631E2FA60D00506871 /* AppDelegate.swift */,
 				38133E651E2FA60D00506871 /* ViewController.swift */,
@@ -195,6 +202,8 @@
 				38E41B181E69CE780090FB81 /* User */,
 				38E0D6251E60718A0008A5B9 /* WalkThrough */,
 				38133E671E2FA60D00506871 /* Main.storyboard */,
+				38F8A72A1E97926200F6C68E /* LoginViewUtils.swift */,
+				381BE37C1E925B09006FFC05 /* LoginEmailViewController.swift */,
 				388067A81E2FAF9100DB26A0 /* Walkthrough.storyboard */,
 				38133E6C1E2FA60D00506871 /* LaunchScreen.storyboard */,
 				38133E6A1E2FA60D00506871 /* Assets.xcassets */,
@@ -326,6 +335,14 @@
 				381BE37A1E90007B006FFC05 /* MapUIViewController.swift */,
 			);
 			name = Search;
+			sourceTree = "<group>";
+		};
+		38F8A72E1E97FBBF00F6C68E /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				38F8A72C1E97FAFA00F6C68E /* ArialHB.ttc */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 		BEEF8EAF497D715C2746FCA3 /* Pods */ = {
@@ -479,6 +496,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38F8A72D1E97FB2300F6C68E /* ArialHB.ttc in Resources */,
 				38133E6E1E2FA60D00506871 /* LaunchScreen.storyboard in Resources */,
 				38133E6B1E2FA60D00506871 /* Assets.xcassets in Resources */,
 				388067A91E2FAF9100DB26A0 /* Walkthrough.storyboard in Resources */,
@@ -669,7 +687,9 @@
 				38E0D6291E60778F0008A5B9 /* askViewController.swift in Sources */,
 				38C9A6181E749D4700A7786E /* SkillCollectionViewCell.swift in Sources */,
 				3826EE9E1E82CE5E0000CBDB /* AsksArroundTableViewCell.swift in Sources */,
+				38F8A72B1E97926200F6C68E /* LoginViewUtils.swift in Sources */,
 				38E0D6271E6071B40008A5B9 /* Ask.swift in Sources */,
+				381BE37D1E925B09006FFC05 /* LoginEmailViewController.swift in Sources */,
 				383B6BFA1E899B40007B64F7 /* FoldingCell.swift in Sources */,
 				38F13DA31E61E58B0081028F /* AsksArround.swift in Sources */,
 				381BE37B1E90007B006FFC05 /* MapUIViewController.swift in Sources */,
