@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		231F4472151CFC8EC5498413 /* Pods_EfreiApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B1A0425C181D120C09A9DFE /* Pods_EfreiApp.framework */; };
 		38133E641E2FA60D00506871 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38133E631E2FA60D00506871 /* AppDelegate.swift */; };
-		38133E661E2FA60D00506871 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38133E651E2FA60D00506871 /* ViewController.swift */; };
 		38133E691E2FA60D00506871 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38133E671E2FA60D00506871 /* Main.storyboard */; };
 		38133E6B1E2FA60D00506871 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38133E6A1E2FA60D00506871 /* Assets.xcassets */; };
 		38133E6E1E2FA60D00506871 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38133E6C1E2FA60D00506871 /* LaunchScreen.storyboard */; };
@@ -20,8 +19,6 @@
 		381BE37D1E925B09006FFC05 /* LoginEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381BE37C1E925B09006FFC05 /* LoginEmailViewController.swift */; };
 		3826EE9E1E82CE5E0000CBDB /* AsksArroundTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3826EE9D1E82CE5E0000CBDB /* AsksArroundTableViewCell.swift */; };
 		383B6BFA1E899B40007B64F7 /* FoldingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383B6BF91E899B40007B64F7 /* FoldingCell.swift */; };
-		3878090A1E2FA81B00E44CD2 /* EZSwipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387809081E2FA81B00E44CD2 /* EZSwipeController.swift */; };
-		3878090B1E2FA81B00E44CD2 /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387809091E2FA81B00E44CD2 /* MenuVC.swift */; };
 		3878090D1E2FAA5400E44CD2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3878090C1E2FAA5400E44CD2 /* LoginViewController.swift */; };
 		388067A71E2FAF1100DB26A0 /* Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388067A61E2FAF1100DB26A0 /* Transition.swift */; };
 		388067A91E2FAF9100DB26A0 /* Walkthrough.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 388067A81E2FAF9100DB26A0 /* Walkthrough.storyboard */; };
@@ -74,7 +71,6 @@
 /* Begin PBXFileReference section */
 		38133E601E2FA60D00506871 /* EfreiApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EfreiApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		38133E631E2FA60D00506871 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		38133E651E2FA60D00506871 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		38133E681E2FA60D00506871 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		38133E6A1E2FA60D00506871 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		38133E6D1E2FA60D00506871 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -90,8 +86,6 @@
 		381BE37C1E925B09006FFC05 /* LoginEmailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginEmailViewController.swift; sourceTree = "<group>"; };
 		3826EE9D1E82CE5E0000CBDB /* AsksArroundTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsksArroundTableViewCell.swift; sourceTree = "<group>"; };
 		383B6BF91E899B40007B64F7 /* FoldingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoldingCell.swift; sourceTree = "<group>"; };
-		387809081E2FA81B00E44CD2 /* EZSwipeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EZSwipeController.swift; sourceTree = "<group>"; };
-		387809091E2FA81B00E44CD2 /* MenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuVC.swift; sourceTree = "<group>"; };
 		3878090C1E2FAA5400E44CD2 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		388067A61E2FAF1100DB26A0 /* Transition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transition.swift; sourceTree = "<group>"; };
 		388067A81E2FAF9100DB26A0 /* Walkthrough.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Walkthrough.storyboard; sourceTree = "<group>"; };
@@ -189,7 +183,6 @@
 				38F8A72E1E97FBBF00F6C68E /* Fonts */,
 				38FA09A91E3277AC00C5A9F0 /* EfreiApp.entitlements */,
 				38133E631E2FA60D00506871 /* AppDelegate.swift */,
-				38133E651E2FA60D00506871 /* ViewController.swift */,
 				389984DE1E6A30D90023ECBF /* DeviceInfos.swift */,
 				388067B61E2FBC7C00DB26A0 /* keyboardUtils.swift */,
 				3890456B1E8BFF5D0092F276 /* CustomSegue.swift */,
@@ -243,8 +236,6 @@
 			isa = PBXGroup;
 			children = (
 				388067A61E2FAF1100DB26A0 /* Transition.swift */,
-				387809081E2FA81B00E44CD2 /* EZSwipeController.swift */,
-				387809091E2FA81B00E44CD2 /* MenuVC.swift */,
 			);
 			name = Navigation;
 			sourceTree = "<group>";
@@ -667,11 +658,8 @@
 				389984DB1E6A285D0023ECBF /* ScoreViewController.swift in Sources */,
 				388067AD1E2FAFB100DB26A0 /* CustomPageViewController.swift in Sources */,
 				388067A71E2FAF1100DB26A0 /* Transition.swift in Sources */,
-				3878090A1E2FA81B00E44CD2 /* EZSwipeController.swift in Sources */,
 				388A84D51E6F3388001AD6DB /* SkillsSelectionViewController.swift in Sources */,
-				3878090B1E2FA81B00E44CD2 /* MenuVC.swift in Sources */,
 				388067B71E2FBC7C00DB26A0 /* keyboardUtils.swift in Sources */,
-				38133E661E2FA60D00506871 /* ViewController.swift in Sources */,
 				38F13DA11E61E3990081028F /* AsksArroundViewController.swift in Sources */,
 				389984DF1E6A30D90023ECBF /* DeviceInfos.swift in Sources */,
 				389984E11E6B32580023ECBF /* AvailabilityViewController.swift in Sources */,

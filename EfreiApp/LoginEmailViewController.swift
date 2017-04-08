@@ -69,15 +69,17 @@ class LoginEmailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
-        
-        
+        if FIRAuth.auth()?.currentUser != nil {
+            // if user already logged in...
+            TransitionSegue.segue.switchToNavigationController()
+        }
+                
         keyframeAnimationOptions = UIViewKeyframeAnimationOptions(rawValue: animationOptions.rawValue)
         
         configureEmailView()
         configureSignInView()
     }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -109,8 +111,13 @@ class LoginEmailViewController: UIViewController {
         continueButtonLoadingView.color = UIColor.white
         continueButtonLoadingView.type = .ballRotateChase
         
-        mailTextField.addTarget(self, action: #selector(mailFieldEdited), for: UIControlEvents.editingChanged)
-        passwordTextField.addTarget(self, action: #selector(passwordFieldEdited), for: UIControlEvents.editingChanged)
+        mailTextField.addTarget(self, action: #selector(mailFieldEdited), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(passwordFieldEdited), for: .editingChanged)
+        
+        self.containerView.willRemoveSubview(backButton)
+        self.containerView.willRemoveSubview(continueButtonView)
+        self.continueButtonView.willRemoveSubview(continueButton)
+        self.continueButtonView.willRemoveSubview(continueButtonLoadingView)
         
         self.containerView.addSubview(backButton)
         self.containerView.addSubview(continueButtonView)
@@ -135,6 +142,7 @@ class LoginEmailViewController: UIViewController {
         SignInContinueButtonLoadingView.color = UIColor.white
         SignInContinueButtonLoadingView.type = .ballRotateChase
         SignInContinueButtonLoadingView.center = SignUpContinueButtonView.center
+        SignUpContinueButtonView.willRemoveSubview(SignInContinueButtonLoadingView)
         SignUpContinueButtonView.addSubview(SignInContinueButtonLoadingView)
         
         SignUpLabel.frame.origin.y = screenSize.height * 0.16
@@ -276,7 +284,7 @@ class LoginEmailViewController: UIViewController {
                     }
                 }
             } else {
-                printAlert(alert: "This is not a valid email address", success: false)
+                showAlert(alert: "This is not a valid email address", success: false)
                 print("not valid email")
             }
             
@@ -287,6 +295,8 @@ class LoginEmailViewController: UIViewController {
     }
     
     func switchToSignInInfosView() {
+        
+        configureFieldsTarget()
         
         _ = self.SignUpFirstNameField.becomeFirstResponder()
         
@@ -303,7 +313,10 @@ class LoginEmailViewController: UIViewController {
     
     func signInInfosBackButtonTouched() {
         
+        print("back")
+        
         continueButton.isHidden = false
+        SignUpView.willRemoveSubview(SignUpBackButton)
         SignUpView.addSubview(SignUpBackButton)
         SignUpBackButton.isHidden = false
         
@@ -337,6 +350,7 @@ class LoginEmailViewController: UIViewController {
                 errorLabel.setSizeFont(sizeFont: 15)
                 errorLabel.text = "There is an error somewhere!"
                 
+                SignUpView.willRemoveSubview(errorLabel)
                 SignUpView.addSubview(errorLabel)
             }
         }
@@ -351,6 +365,7 @@ class LoginEmailViewController: UIViewController {
         SignUpContinueButton.removeTarget(nil, action: nil, for: .allEvents)
         SignUpContinueButton.addTarget(self, action: #selector(signInWithFirebase), for: .touchUpInside)
         
+        view.willRemoveSubview(signInPasswordView)
         signInPasswordView.frame = CGRect(x: screenSize.width + 1, y: 0, width: screenSize.width, height: screenSize.height)
         signInPasswordView.backgroundColor = UIColor.white
         view.addSubview(signInPasswordView)
@@ -367,7 +382,7 @@ class LoginEmailViewController: UIViewController {
         signInPasswordView.addSubview(label)
         
         signInPasswordField = SkyFloatingLabelTextField(frame: SignUpFirstNameField.frame)
-        signInPasswordField.frame.size.width = screenSize.width * 0.6
+        signInPasswordField.frame.size.width = screenSize.width * 0.7
         signInPasswordField.text = ""
         signInPasswordField.placeholder = "Enter Password"
         signInPasswordField.titleColor = SignUpFirstNameField.titleColor
@@ -377,7 +392,7 @@ class LoginEmailViewController: UIViewController {
         signInPasswordView.addSubview(signInPasswordField)
         
         signInPasswordRepeatField = SkyFloatingLabelTextField(frame: SignUpCountryField.frame)
-        signInPasswordField.frame.size.width = screenSize.width * 0.6
+        signInPasswordRepeatField.frame.size.width = screenSize.width * 0.7
         signInPasswordRepeatField.text = ""
         signInPasswordRepeatField.placeholder = "Retype Password"
         signInPasswordRepeatField.titleColor = SignUpFirstNameField.titleColor
@@ -391,6 +406,9 @@ class LoginEmailViewController: UIViewController {
         
         _ = signInPasswordField.becomeFirstResponder()
         
+        signInPasswordField.addTarget(self, action: #selector(signInPasswordFieldEdited), for: .editingChanged)
+        signInPasswordRepeatField.addTarget(self, action: #selector(signInPasswordRepeatFieldEdited), for: .editingChanged)
+        
         UIView.animateKeyframes(withDuration: 0.4, delay: 0, options: keyframeAnimationOptions, animations: {
             
             self.signInPasswordView.frame.origin.x = 0
@@ -399,6 +417,12 @@ class LoginEmailViewController: UIViewController {
     }
     
     func signInPasswordBackButtonTouched() {
+        
+        print("back")
+        
+        SignUpView.addSubview(SignUpBackButton)
+        SignUpBackButton.removeTarget(nil, action: nil, for: .allEvents)
+        SignUpBackButton.addTarget(self, action: #selector(signInInfosBackButtonTouched), for: .touchUpInside)
         
         SignUpContinueButton.removeTarget(nil, action: nil, for: .allEvents)
         SignUpContinueButton.addTarget(self, action: #selector(signInInfosBackButtonTouched), for: .touchUpInside)
@@ -411,6 +435,10 @@ class LoginEmailViewController: UIViewController {
     
     func signInWithFirebase() {
         
+        print("signing in")
+        
+        SignInContinueButtonLoadingView.startAnimating()
+        
         let errorLabel = UILabel(frame: CGRect(x: SignUpPhoneNumberLabel.frame.origin.x, y: screenSize.height * 0.6, width: 200, height: 30))
         errorLabel.textColor = UIColor(red:0.75, green:0.22, blue:0.17, alpha:1.0)
         errorLabel.font = SignUpLabel.font
@@ -419,24 +447,36 @@ class LoginEmailViewController: UIViewController {
         
         if (signInPasswordField.text! == signInPasswordRepeatField.text!) {
             
+            print("passwords match")
+            
             if (LoginViewUtils().isValidPassword(testStr: signInPasswordField.text!)) {
                 
-                FIRAuth.auth()?.createUser(withEmail: mailTextField.text!, password: passwordTextField.text!) { (user, error) in
+                print("secure passsword")
+                
+                FIRAuth.auth()?.createUser(withEmail: mailTextField.text!, password: signInPasswordField.text!) { (user, error) in
                     
                     if error == nil {
-                        
+                        print("success")
                         LoginViewUtils().sendUserInformations(user: (user?.uid)!
                             , email: self.mailTextField.text!, firstName: self.SignUpFirstNameField.text!, lastName: self.SignUpLastNameField.text!, country: self.SignUpCountryField.text!, state: self.SignUpStateField.text!, address: self.SignUpAddressField.text!, zipcode: self.SignUpZipcodeField.text!, phoneNumber: self.SignUpPhoneNumberLabel.text!)
+                        
+                        //Go to the HomeViewController if the login is successful
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "MenuVC")
+                        self.present(vc!, animated: true, completion: nil)
+                        
                     } else {
                         print(String(describing: error?.localizedDescription))
                     }
+                    self.SignInContinueButtonLoadingView.stopAnimating()
                 }
             } else {
+                print("Password not secure")
                 errorLabel.text = "Password not secure"
                 signInPasswordField.lineColor = UIColor(red:0.75, green:0.22, blue:0.17, alpha:1.0)
                 signInPasswordRepeatField.lineColor = UIColor(red:0.75, green:0.22, blue:0.17, alpha:1.0)
             }
         } else {
+            print("Passwords don't match")
             errorLabel.text = "Passwords don't match"
             signInPasswordField.lineColor = UIColor(red:0.75, green:0.22, blue:0.17, alpha:1.0)
             signInPasswordRepeatField.lineColor = UIColor(red:0.75, green:0.22, blue:0.17, alpha:1.0)
@@ -485,6 +525,17 @@ class LoginEmailViewController: UIViewController {
         
         lineView.backgroundColor = UIColor.black
         
+        
+        view.willRemoveSubview(loginView)
+        loginView.willRemoveSubview(backButton)
+        loginView.willRemoveSubview(passwordTextField)
+        loginView.willRemoveSubview(loginButtonView)
+        loginView.willRemoveSubview(forgotPasswordButton)
+        loginView.willRemoveSubview(noAccountButton)
+        loginView.willRemoveSubview(lineView)
+        loginView.willRemoveSubview(placeholderLabel)
+        loginButtonView.willRemoveSubview(loginButton)
+        loginButtonView.willRemoveSubview(continueButtonLoadingView)
         view.addSubview(loginView)
         loginView.addSubview(backButton)
         loginView.addSubview(passwordTextField)
@@ -520,7 +571,7 @@ class LoginEmailViewController: UIViewController {
         
         if (passwordTextField.text?.isEmpty)! {
             
-            printAlert(alert: "Please enter your password", success: false)
+            showAlert(alert: "Please enter your password", success: false)
         } else {
             
             continueButtonLoadingView.startAnimating()
@@ -529,10 +580,10 @@ class LoginEmailViewController: UIViewController {
             FIRAuth.auth()?.signIn(withEmail: mailTextField.text!, password: passwordTextField.text!) { (user, error) in
                 
                 if error == nil {
-                    self.printAlert(alert: "You are successfuly logged in!", success: true)
+                    self.showAlert(alert: "You are successfuly logged in!", success: true)
                     print("user successfuly logged in with ID: \(String(describing: FIRAuth.auth()?.currentUser?.uid))")
                 } else {
-                    self.printAlert(alert: (error?.localizedDescription)!, success: false)
+                    self.showAlert(alert: (error?.localizedDescription)!, success: false)
                 }
                 self.continueButtonLoadingView.stopAnimating()
                 self.loginButton.isHidden = false
@@ -550,6 +601,9 @@ class LoginEmailViewController: UIViewController {
     
     func backPasswordTouched() {
         
+        containerView.willRemoveSubview(backButton)
+        containerView.willRemoveSubview(lineView)
+        containerView.willRemoveSubview(placeholderLabel)
         containerView.addSubview(backButton)
         containerView.addSubview(lineView)
         containerView.addSubview(placeholderLabel)
@@ -577,6 +631,7 @@ class LoginEmailViewController: UIViewController {
     
     func forgotPasswordButtonTouched() {
         print("forgotPasswordButton touched")
+        continueButtonLoadingView.startAnimating()
         
         if (mailTextField.text?.isEmpty)! {
             print("Enter an email address")
@@ -587,11 +642,12 @@ class LoginEmailViewController: UIViewController {
                 
                 if error != nil {
                     
-                    self.printAlert(alert: "Error", success: false)
+                    self.showAlert(alert: "Error", success: false)
                     print(error?.localizedDescription as Any)
                     
                 } else {
-                    self.printAlert(alert: "You will receive an email", success: true)
+                    self.showAlert(alert: "You will receive an email", success: true)
+                    self.continueButtonLoadingView.stopAnimating()
                 }
             })
         }
@@ -601,15 +657,18 @@ class LoginEmailViewController: UIViewController {
         print("noAccountButton touched")
     }
     
-    func printAlert(alert: String, success: Bool) {
+    func showAlert(alert: String, success: Bool) {
         
         alertLabel.frame = CGRect(x: lineView.frame.origin.x, y: lineView.frame.origin.y + 5, width: lineView.frame.width, height: 30)
         alertLabel.text = alert
         
         if !success { // error
+            
             alertLabel.textColor = UIColor(red:0.75, green:0.22, blue:0.17, alpha:1.0)
             lineView.backgroundColor = UIColor(red:0.75, green:0.22, blue:0.17, alpha:1.0)
+            
         } else { // success
+            
             alertLabel.textColor = UIColor(red:0.15, green:0.68, blue:0.38, alpha:1.0)
             lineView.backgroundColor = UIColor(red:0.15, green:0.68, blue:0.38, alpha:1.0)
         }
@@ -617,6 +676,47 @@ class LoginEmailViewController: UIViewController {
         alertLabel.isHidden = false
         
         loginView.addSubview(alertLabel)
+    }
+    
+    func configureFieldsTarget() {
+        
+        SignUpFirstNameField.addTarget(self, action: #selector(firstNameFieldEdited), for: .editingChanged)
+        SignUpLastNameField.addTarget(self, action: #selector(lastNameFieldEdited), for: .editingChanged)
+        SignUpCountryField.addTarget(self, action: #selector(countryFieldEdited), for: .editingChanged)
+        SignUpStateField.addTarget(self, action: #selector(stateFieldEdited), for: .editingChanged)
+        SignUpAddressField.addTarget(self, action: #selector(addressFieldEdited), for: .editingChanged)
+        SignUpZipcodeField.addTarget(self, action: #selector(zipcodeFieldEdited), for: .editingChanged)
+        SignUpPhoneNumberLabel.addTarget(self, action: #selector(phoneNumberFieldEdited), for: .editingChanged)
+    }
+    func firstNameFieldEdited() {
+        SignUpFirstNameField.lineColor = UIColor.black
+    }
+    func lastNameFieldEdited() {
+        SignUpLastNameField.lineColor = UIColor.black
+    }
+    func countryFieldEdited() {
+        SignUpCountryField.lineColor = UIColor.black
+    }
+    func stateFieldEdited() {
+        SignUpStateField.lineColor = UIColor.black
+    }
+    func addressFieldEdited() {
+        SignUpAddressField.lineColor = UIColor.black
+    }
+    func zipcodeFieldEdited() {
+        SignUpZipcodeField.lineColor = UIColor.black
+    }
+    func phoneNumberFieldEdited() {
+        SignUpPhoneNumberLabel.lineColor = UIColor.black
+    }
+    func signInPasswordFieldEdited() {
+        signInPasswordField.lineColor = UIColor.black
+    }
+    func signInPasswordRepeatFieldEdited() {
+        signInPasswordRepeatField.lineColor = UIColor.black
+        if signInPasswordField.text != signInPasswordField.text {
+            signInPasswordRepeatField.lineColor = UIColor(red:0.75, green:0.22, blue:0.17, alpha:1.0)
+        }
     }
 }
 

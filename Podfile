@@ -11,7 +11,7 @@ target 'EfreiApp' do
   pod 'Firebase/Core'
   pod 'Firebase/Storage'
   pod 'BWWalkthrough'
-  pod 'SwiftLocation', '>= 1.0.6'
+  pod 'SwiftLocation'
   pod 'SwiftyJSON'
   pod 'Firebase/Crash'
   pod 'DateTimePicker'

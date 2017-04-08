@@ -40,7 +40,7 @@ class LoginViewUtils {
     }
     
     func isValidPassword(testStr:String) -> Bool {
-        let passwordRegEx = "^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8}$"
+        let passwordRegEx = "^.*(?=.{6,})(?=.*[A-Z]).*$"
         
         let passwordTest = NSPredicate(format:"SELF MATCHES %@", passwordRegEx)
         return passwordTest.evaluate(with: testStr)

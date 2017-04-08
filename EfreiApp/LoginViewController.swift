@@ -230,7 +230,7 @@ class LoginViewController: keyboardUtils, NVActivityIndicatorViewable {
                 
                 if error == nil {
                     
-                    //Go to the HomeViewController if the login is sucessful
+                    //Go to the HomeViewController if the login is successful
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: "MenuVC")
                     self.present(vc!, animated: true, completion: nil)
                     
