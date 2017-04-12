@@ -69,6 +69,16 @@ public class SPRequestPermissionAssistant: SPRequestPermissionAssistantInterface
         return true
     }
     
+    public func notAllowedPermissions() -> [SPRequestPermissionType] {
+        var notAllowedPermissions: [SPRequestPermissionType] = []
+        for permission in self.permissions {
+            if !self.permissionManager.isAuthorizedPermission(permission) {
+                notAllowedPermissions.append(permission)
+            }
+        }
+        return notAllowedPermissions
+    }
+    
     public func didHide() {
         self.eventsDelegate?.didHide()
     }

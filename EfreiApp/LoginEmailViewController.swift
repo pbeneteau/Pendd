@@ -37,14 +37,14 @@ class LoginEmailViewController: UIViewController {
     @IBOutlet weak var SignUpContinueButton: DynamicButton!
     @IBOutlet weak var SignUpBackButton: DynamicButton!
     
-    let backButton = DynamicButton(style: DynamicButtonStyle.arrowLeft)
-    let continueButton = DynamicButton(style: DynamicButtonStyle.arrowRight)
+    let backButton = DynamicButton(style: .arrowLeft)
+    let continueButton = DynamicButton(style: .arrowRight)
     var continueButtonView  = UIView(frame: CGRect(x: 0, y: 0, width: 70, height: 70))
     var continueButtonLoadingView = NVActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
     
     let loginView = UIView(frame: CGRect(x: 376, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
     let loginButtonView  = UIView(frame: CGRect(x: UIScreen.main.bounds.width * 0.87, y: UIScreen.main.bounds.height * 0.55, width: 70, height: 70))
-    let loginButton = DynamicButton(style: DynamicButtonStyle.arrowRight)
+    let loginButton = DynamicButton(style: .arrowRight)
     
     let forgotPasswordButton = UIButton(frame: CGRect(x: UIScreen.main.bounds.width * 0.1, y: UIScreen.main.bounds.height * 0.55, width: 200, height: 30))
     let noAccountButton = UIButton(frame: CGRect(x: UIScreen.main.bounds.width * 0.1, y: UIScreen.main.bounds.height * 0.6, width: 200, height: 30))
@@ -90,11 +90,11 @@ class LoginEmailViewController: UIViewController {
         
         backButton.isHidden = true
         backButton.alpha = 0
-        backButton.setStyle(DynamicButtonStyle.arrowLeft, animated: true)
+        backButton.setStyle(.arrowLeft, animated: true)
         backButton.frame = CGRect(x: 15, y: 30, width: 35, height: 30)
         backButton.addTarget(self, action: #selector(self.backButtonTouched), for: .touchUpInside)
         
-        continueButton.setStyle(DynamicButtonStyle.arrowRight, animated: true)
+        continueButton.setStyle(.arrowRight, animated: true)
         continueButton.strokeColor = UIColor.white
         continueButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         continueButton.center = continueButtonView.center
@@ -131,11 +131,11 @@ class LoginEmailViewController: UIViewController {
         
         SignUpView.frame.origin.x = screenSize.width + 1
         
-        SignUpBackButton.setStyle(DynamicButtonStyle.arrowLeft, animated: true)
+        SignUpBackButton.setStyle(.arrowLeft, animated: true)
         SignUpBackButton.addTarget(self, action: #selector(signInInfosBackButtonTouched), for: .touchUpInside)
         
         SignUpContinueButton.isHidden = false
-        SignUpContinueButton.setStyle(DynamicButtonStyle.arrowRight, animated: true)
+        SignUpContinueButton.setStyle(.arrowRight, animated: true)
         SignUpContinueButtonView.frame = CGRect(x: screenSize.width * 0.77, y: screenSize.height * 0.55, width: 70, height: 70)
         SignUpContinueButtonView.layer.cornerRadius = SignUpContinueButtonView.frame.width / 2
         
@@ -171,7 +171,7 @@ class LoginEmailViewController: UIViewController {
         
         UIView.animateKeyframes(withDuration: 0.4, delay: 0, options: keyframeAnimationOptions, animations: {
             
-            self.placeholderLabel.frame.origin.y = currentViewHeight * 0.20
+            self.placeholderLabel.frame.origin.y = currentViewHeight * 0.2
             self.placeholderLabel.frame.origin.x = self.deviseLabel.frame.origin.x
             self.placeholderLabel.alpha = 1
         })
@@ -181,8 +181,8 @@ class LoginEmailViewController: UIViewController {
             self.containerView.frame.size.height = currentViewHeight
             self.containerView.frame.origin.y = 0
             
-            self.mailTextField.frame.origin.y = currentViewHeight * 0.30
-            self.mailTextField.attributedPlaceholder = NSAttributedString(string: "exemple@exemple.com", attributes: [NSForegroundColorAttributeName: UIColor(red:0.40, green:0.40, blue:0.40, alpha:0.25)])
+            self.mailTextField.frame.origin.y = currentViewHeight * 0.3
+            self.mailTextField.attributedPlaceholder = NSAttributedString(string: "exemple@exemple.com", attributes: [NSForegroundColorAttributeName: UIColor(red:0.4, green:0.4, blue:0.4, alpha:0.25)])
             
             self.lineView.frame = CGRect(x: self.deviseLabel.frame.origin.x , y: currentViewHeight * 0.37, width: self.mailTextField.frame.size.width, height: 1)
             
@@ -505,7 +505,7 @@ class LoginEmailViewController: UIViewController {
         loginButtonView.layer.cornerRadius = 70 / 2
         loginButtonView.clipsToBounds = true
         
-        loginButton.setStyle(DynamicButtonStyle.arrowRight, animated: true)
+        loginButton.setStyle(.arrowRight, animated: true)
         loginButton.strokeColor = UIColor.white
         loginButton.frame = CGRect(x: (loginButtonView.frame.size.width - 30) / 2, y: (loginButtonView.frame.size.height - 30) / 2, width: 30, height: 30)
         loginButton.addTarget(self, action: #selector(loginButtonTouched), for: .touchUpInside)
@@ -582,6 +582,10 @@ class LoginEmailViewController: UIViewController {
                 if error == nil {
                     self.showAlert(alert: "You are successfuly logged in!", success: true)
                     print("user successfuly logged in with ID: \(String(describing: FIRAuth.auth()?.currentUser?.uid))")
+                    
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "MenuVC")
+                    self.present(vc!, animated: true, completion: nil)
+                    
                 } else {
                     self.showAlert(alert: (error?.localizedDescription)!, success: false)
                 }
@@ -630,6 +634,59 @@ class LoginEmailViewController: UIViewController {
     }
     
     func forgotPasswordButtonTouched() {
+        
+        passwordTextField.resignFirstResponder()
+        
+        let forgotPasswordView = UIView(frame: CGRect(x: 0, y: screenSize.height + 1, width: screenSize.width, height: screenSize.height * 0.35))
+        forgotPasswordView.backgroundColor = UIColor.white
+        self.view.addSubview(forgotPasswordView)
+        
+        let emailSentLabel = UILabel(frame: CGRect(x: screenSize.width * 0.1, y: forgotPasswordView.frame.height * 0.15, width: screenSize.width * 0.5, height: 25))
+        emailSentLabel.text = "Email sent!"
+        emailSentLabel.setSizeFont(sizeFont: 25)
+        forgotPasswordView.addSubview(emailSentLabel)
+        
+        let label1 = UILabel(frame: CGRect(x: screenSize.width * 0.1, y: forgotPasswordView.frame.height * 0.32, width: 300, height: 15))
+        label1.text = "Check your inbox for an email"
+        label1.setSizeFont(sizeFont: 15)
+        label1.textColor = UIColor.gray
+        forgotPasswordView.addSubview(label1)
+        
+        let label2 = UILabel(frame: CGRect(x: screenSize.width * 0.1, y: forgotPasswordView.frame.height * 0.42, width: 300, height: 15))
+        label2.text = "from Apptitle whith a link to reset"
+        label2.setSizeFont(sizeFont: 15)
+        label2.textColor = UIColor.gray
+        forgotPasswordView.addSubview(label2)
+        
+        let label3 = UILabel(frame: CGRect(x: screenSize.width * 0.1, y: forgotPasswordView.frame.height * 0.52, width: 300, height: 15))
+        label3.text = "your password"
+        label3.setSizeFont(sizeFont: 15)
+        label3.textColor = UIColor.gray
+        forgotPasswordView.addSubview(label3)
+        
+        let resendButton = UIButton(frame: CGRect(x: screenSize.width * 0.1, y: forgotPasswordView.frame.height * 0.7, width: screenSize.width * 0.35, height: forgotPasswordView.frame.height * 0.22))
+        resendButton.backgroundColor = UIColor.white
+        resendButton.layer.borderWidth = 1
+        resendButton.layer.borderColor = UIColor.black.cgColor
+        resendButton.setTitle("RESEND", for: .normal)
+        resendButton.setTitleColor(UIColor.black, for: .normal)
+        forgotPasswordView.addSubview(resendButton)
+        
+        let okButton = UIButton(frame: CGRect(x: screenSize.width * 0.55, y: forgotPasswordView.frame.height * 0.7, width: screenSize.width * 0.35, height: forgotPasswordView.frame.height * 0.22))
+        okButton.backgroundColor = UIColor.black
+        okButton.setTitle("OK", for: .normal)
+        okButton.setTitleColor(UIColor.white, for: .normal)
+        forgotPasswordView.addSubview(okButton)
+        
+        let grayView = UIView(frame: CGRect(x: 0, y: 0, width: screenSize.width, height: screenSize.height))
+        grayView.backgroundColor = UIColor.black
+        grayView.alpha = 0
+        loginView.addSubview(grayView)
+        
+
+        
+        
+        
         print("forgotPasswordButton touched")
         continueButtonLoadingView.startAnimating()
         
@@ -637,6 +694,8 @@ class LoginEmailViewController: UIViewController {
             print("Enter an email address")
             
         } else {
+            
+            
             
             FIRAuth.auth()?.sendPasswordReset(withEmail: mailTextField.text!, completion: { (error) in
                 
@@ -646,12 +705,19 @@ class LoginEmailViewController: UIViewController {
                     print(error?.localizedDescription as Any)
                     
                 } else {
-                    self.showAlert(alert: "You will receive an email", success: true)
+                    
+                    UIView.animateKeyframes(withDuration: 0.4, delay: 0, options: self.keyframeAnimationOptions, animations: {
+                        
+                        grayView.alpha = 0.6
+                        forgotPasswordView.frame.origin.y = self.screenSize.height - forgotPasswordView.frame.height
+                    })
+                    
                     self.continueButtonLoadingView.stopAnimating()
                 }
             })
         }
     }
+
     
     func noAccountButtonTouched() {
         print("noAccountButton touched")
@@ -720,13 +786,6 @@ class LoginEmailViewController: UIViewController {
     }
 }
 
-extension UIViewKeyframeAnimationOptions {
-    
-    init(animationOptions: UIViewAnimationOptions) {
-        rawValue = animationOptions.rawValue
-    }
-    
-}
 
 extension UILabel {
     func setSizeFont (sizeFont: Double) {

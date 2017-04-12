@@ -86,9 +86,14 @@ class MainViewController: UIViewController, NVActivityIndicatorViewable {
     @IBAction func helpButtonAction(_ sender: Any) {
         
         startAnimating(CGSize(width: 30, height: 30), message: "Loading...", type: .ballScaleRippleMultiple)
+        
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "askViewController") as! askViewController
+        
+        present(vc, animated: true, completion: nil)
     }
     
     func checkPermissionsState() {
+        
         let Location = permissionAssistant.isAllowPermission(.Location)
         let Camera = permissionAssistant.isAllowPermission(.PhotoLibrary)
         let Notification = permissionAssistant.isAllowPermission(.Notification)

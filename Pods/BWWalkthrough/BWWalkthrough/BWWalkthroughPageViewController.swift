@@ -25,7 +25,7 @@ SOFTWARE.
 
 import UIKit
 
-public enum WalkthroughAnimationType: String{
+public enum WalkthroughAnimationType:String{
     case Linear = "Linear"
     case Curve = "Curve"
     case Zoom = "Zoom"
@@ -40,12 +40,17 @@ public enum WalkthroughAnimationType: String{
         }
     }
 }
+
 open class BWWalkthroughPageViewController: UIViewController, BWWalkthroughPage {
-    private var animation: WalkthroughAnimationType = .Linear
-    private var subviewsSpeed: [CGPoint] = Array()
-    private var notAnimatableViews: [Int] = []
-    @IBInspectable var speed:CGPoint = CGPoint(x: 0.0, y: 0.0);
-    @IBInspectable var speedVariance:CGPoint = CGPoint(x: 0.0, y: 0.0)
+    
+    private var animation:WalkthroughAnimationType = .Linear
+    private var subviewsSpeed:[CGPoint] = Array()
+    private var notAnimatableViews:[Int] = [] // Array of views' tags that should not be animated during the scroll/transition
+    
+    // MARK: Inspectable Properties
+    // Edit these values using the Attribute inspector or modify directly the "User defined runtime attributes" in IB
+    @IBInspectable var speed:CGPoint = CGPoint(x: 0.0, y: 0.0);            // Note if you set this value via Attribute inspector it can only be an Integer (change it manually via User defined runtime attribute if you need a Float)
+    @IBInspectable var speedVariance:CGPoint = CGPoint(x: 0.0, y: 0.0)     // Note if you set this value via Attribute inspector it can only be an Integer (change it manually via User defined runtime attribute if you need a Float)
     @IBInspectable var animationType:String {
         set(value){
             self.animation = WalkthroughAnimationType(rawValue: value)!

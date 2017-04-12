@@ -9,8 +9,9 @@
 import UIKit
 import M13Checkbox
 import Firebase
+import InteractiveSideMenu
 
-class AvailabilityViewController: UIViewController {
+class AvailabilityViewController: MenuItemContentViewController {
     
     @IBOutlet weak var Monday: M13Checkbox!
     @IBOutlet weak var Tuesday: M13Checkbox!
@@ -42,7 +43,7 @@ class AvailabilityViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        fillCheckBoxesWithData()
+        //fillCheckBoxesWithData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -165,5 +166,9 @@ class AvailabilityViewController: UIViewController {
     @IBAction func setButton(_ sender: Any) {
         sendData()
         dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func menuButton(_ sender: Any) {
+        showMenu()
     }
 }

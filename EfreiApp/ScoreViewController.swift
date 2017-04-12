@@ -8,8 +8,9 @@
 
 import UIKit
 import Firebase
+import InteractiveSideMenu
 
-class ScoreViewController: UIViewController {
+class ScoreViewController: MenuItemContentViewController {
     
     
     @IBOutlet weak var averageMarkLabel: UILabel!
@@ -51,6 +52,6 @@ class ScoreViewController: UIViewController {
     }
     
     @IBAction func closeButton(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        showMenu()
     }
 }

@@ -27,8 +27,10 @@
 import UIKit
 
 /// Up caret style: ⌃
-final public class DynamicButtonStyleCaretUp: DynamicButtonStyle {
-  convenience required public init(center: CGPoint, size: CGFloat, offset: CGPoint, lineWidth: CGFloat) {
+struct DynamicButtonStyleCaretUp: DynamicButtonBuildableStyle {
+  let pathVector: DynamicButtonPathVector
+
+  init(center: CGPoint, size: CGFloat, offset: CGPoint, lineWidth: CGFloat) {
     let thirdSize = size / 3
     let sixthSize = size / 6
 
@@ -38,16 +40,14 @@ final public class DynamicButtonStyleCaretUp: DynamicButtonStyle {
 
     let offsetFromCenter = PathHelper.gravityPointOffset(fromCenter: center, a: a, b: b, c: c)
 
-    let p1 = PathHelper.line(from: a, to: b, offset: offsetFromCenter)
-    let p2 = PathHelper.line(from: a, to: c, offset: offsetFromCenter)
+    let p12 = PathHelper.line(from: a, to: b, offset: offsetFromCenter)
+    let p34 = PathHelper.line(from: a, to: c, offset: offsetFromCenter)
 
-    self.init(pathVector: (p1, p1, p2, p2))
+    pathVector = DynamicButtonPathVector(p1: p12, p2: p12, p3: p34, p4: p34)
   }
 
-  // MARK: - Conforming the CustomStringConvertible Protocol
-
-  /// A textual representation of "Caret Up" style.
-  public override var description: String {
+  /// "Caret Up" style.
+  static var styleName: String {
     return "Caret Up"
   }
 }

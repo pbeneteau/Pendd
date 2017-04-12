@@ -8,27 +8,30 @@
 
 import UIKit
 import Firebase
+import InteractiveSideMenu
 
-class CurrentUserProfileViewController: UIViewController {
+class CurrentUserProfileViewController: MenuItemContentViewController {
     
     let ref = FIRDatabase.database().reference()
     var user = FIRAuth.auth()?.currentUser
+    
+    let animationOptions: UIViewAnimationOptions = .curveEaseOut
+    var keyframeAnimationOptions: UIViewKeyframeAnimationOptions!
+    
     
     var userName: String = ""
     var userEmail: String = ""
     var userAddress: String = ""
     
-    @IBOutlet weak var userEmailLabel: UILabel!
-    @IBOutlet weak var userNameLabel: UILabel!
-    @IBOutlet weak var userAddressLabel: UILabel!
+    @IBOutlet weak var containerView: UIView!
     
-    @IBOutlet weak var editAddressView: UIView!
-    @IBOutlet weak var editAddressField: UITextField!
+    @IBOutlet weak var userNameLabel: UILabel!
+    
+    @IBOutlet weak var logoutButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        editAddressView.isHidden = true
         initInfos()
         
     }
@@ -42,34 +45,77 @@ class CurrentUserProfileViewController: UIViewController {
         
     }
     
-    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     
     func initInfos() {
         mainUser().initUserFirstName(userId: (user?.uid)!) { firstName in
             mainUser().initUserLastName(userId: (self.user?.uid)!) { lastName in
                 self.userNameLabel.text = "\(firstName) \(lastName)"
-                self.userEmailLabel.text = self.user?.email
             }
         }
+    }
+    
+    @IBAction func logoutButton(_ sender: Any) {
         
-        locationHelp().retrieveUserDatabaseAdress(userID: (user?.uid)!) { address in
-            self.userAddressLabel.text = address
-        }
+        self.view.backgroundColor = UIColor(red:0.88, green:0.31, blue:0.31, alpha:1.0)
+        
+        UIView.animateKeyframes(withDuration: 0.4, delay: 0, options: .calculationModeLinear, animations: {
+            
+            self.containerView.frame.origin.y += self.logoutButton.frame.height
+            
+        })
     }
     
-    @IBAction func closeButton(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+    @IBAction func confirmLogoutButton(_ sender: Any) {
+        
+        UIView.animateKeyframes(withDuration: 0.4, delay: 0, options: .calculationModeDiscrete, animations: {
+            
+            self.containerView.frame.origin.y -= self.logoutButton.frame.height
+        })
+    
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: {
+            self.view.backgroundColor = UIColor.white
+            
+            if FIRAuth.auth()?.currentUser != nil {
+                do {
+                    try FIRAuth.auth()?.signOut()
+                    let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "loginView")
+                    self.present(vc, animated: true, completion: nil)
+                    
+                } catch let error as NSError {
+                    print(error.localizedDescription)
+                }
+            }
+            print("user did logout")
+        })
     }
     
-    @IBAction func editAddressButton(_ sender: Any) {
-        editAddressView.isHidden = false
+    @IBAction func cancelLogout(_ sender: Any) {
+        
+        UIView.animateKeyframes(withDuration: 0.4, delay: 0, options: .calculationModeCubic, animations: {
+            
+            self.containerView.frame.origin.y -= self.logoutButton.frame.height
+        })
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: {
+            self.containerView.backgroundColor = UIColor.white
+        })
+        
     }
     
-    @IBAction func editAddressSubmit(_ sender: Any) {
-        ref.child("users").child((user?.uid)!).child("email").setValue(editAddressField.text)
-        editAddressView.isHidden = true
+    @IBAction func menuButton(_ sender: Any) {
+        showMenu()
     }
     
-    @IBAction func scoreButton(_ sender: Any) {
+    
+}
+
+extension UIViewKeyframeAnimationOptions {
+    
+    init(animationOptions: UIViewAnimationOptions) {
+        rawValue = animationOptions.rawValue
     }
+    
 }

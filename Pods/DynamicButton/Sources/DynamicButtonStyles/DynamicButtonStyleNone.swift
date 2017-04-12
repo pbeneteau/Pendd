@@ -27,20 +27,20 @@
 import UIKit
 
 /// No style
-final public class DynamicButtonStyleNone: DynamicButtonStyle {
-  convenience required public init(center: CGPoint, size: CGFloat, offset: CGPoint, lineWidth: CGFloat) {
+struct DynamicButtonStyleNone: DynamicButtonBuildableStyle {
+  let pathVector: DynamicButtonPathVector
+
+  init(center: CGPoint, size: CGFloat, offset: CGPoint, lineWidth: CGFloat) {
     let p1 = UIBezierPath(rect: CGRect(x: center.x - size, y: center.y - size, width: 0, height: 0)).cgPath
     let p2 = UIBezierPath(rect: CGRect(x: center.x + size, y: center.y - size, width: 0, height: 0)).cgPath
     let p3 = UIBezierPath(rect: CGRect(x: center.x - size, y: center.y + size, width: 0, height: 0)).cgPath
     let p4 = UIBezierPath(rect: CGRect(x: center.x + size, y: center.y + size, width: 0, height: 0)).cgPath
 
-    self.init(pathVector: (p1, p2, p3, p4))
+    pathVector = DynamicButtonPathVector(p1: p1, p2: p2, p3: p3, p4: p4)
   }
 
-  // MARK: - Conforming the CustomStringConvertible Protocol
-
-  /// A textual representation of "None" style.
-  public override var description: String {
-    return "None"
+  /// "None" style.
+  static var styleName: String {
+    return ""
   }
 }

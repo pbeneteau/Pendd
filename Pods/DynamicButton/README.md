@@ -1,18 +1,23 @@
 ![DynamicButton](http://yannickloriot.com/resources/dynamicbutton-header.png)
 
-[![Supported Platforms](https://cocoapod-badges.herokuapp.com/p/DynamicButton/badge.svg)](http://cocoadocs.org/docsets/DynamicButton/) [![Version](https://cocoapod-badges.herokuapp.com/v/DynamicButton/badge.svg)](http://cocoadocs.org/docsets/DynamicButton/) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![Build Status](https://travis-ci.org/yannickl/DynamicButton.svg?branch=master)](https://travis-ci.org/yannickl/DynamicButton) [![codecov.io](http://codecov.io/github/yannickl/DynamicButton/coverage.svg?branch=master)](http://codecov.io/github/yannickl/DynamicButton?branch=master) [![codebeat badge](https://codebeat.co/badges/ed7210be-6c9d-43ff-87a0-a10c007fe1b4)](https://codebeat.co/projects/github-com-yannickl-dynamicbutton)
+[![Supported Platforms](https://cocoapod-badges.herokuapp.com/p/DynamicButton/badge.svg)](http://cocoadocs.org/docsets/DynamicButton/) [![Version](https://cocoapod-badges.herokuapp.com/v/DynamicButton/badge.svg)](http://cocoadocs.org/docsets/DynamicButton/) <a href="https://github.com/Carthage/Carthage"><img alt="Carthage compatible" src="https://img.shields.io/badge/Carthage-%E2%9C%93-brightgreen.svg?style=flat"/></a>
+  <a href="https://github.com/apple/swift-package-manager"><img alt="Swift Package Manager compatible" src="https://img.shields.io/badge/SPM-%E2%9C%93-brightgreen.svg?style=flat"/></a> [![Build Status](https://travis-ci.org/yannickl/DynamicButton.svg?branch=master)](https://travis-ci.org/yannickl/DynamicButton) [![codecov.io](http://codecov.io/github/yannickl/DynamicButton/coverage.svg?branch=master)](http://codecov.io/github/yannickl/DynamicButton?branch=master) [![codebeat badge](https://codebeat.co/badges/ed7210be-6c9d-43ff-87a0-a10c007fe1b4)](https://codebeat.co/projects/github-com-yannickl-dynamicbutton)
 
 **DynamicButton** is a powerful flat design button written in Swift to display *hamburger button* like with animated transitions between style updates. It also allows you to create your own custom symbol / style buttons!
 
 <p align="center">
-  <img src="http://yannickloriot.com/resources/dynamicbutton.gif" alt="DynamicButton" />
+  <img src="https://cloud.githubusercontent.com/assets/798235/20039804/d4b533ca-a44a-11e6-8d4e-07aa45ef4a76.gif" alt="DynamicButton" />
+</p>
+
+<p align="center">
+    <a href="#requirements">Requirements</a> • <a href="#usage">Usage</a> • <a href="#installation">Installation</a> • <a href="#contribution">Contribution</a> • <a href="#contact">Contact</a> • <a href="#license-mit">License</a>
 </p>
 
 ## Requirements
 
 - iOS 8.0+ / tvOS 9.0+
 - Xcode 8.0+
-- Swift 3.0+
+- Swift 3.1+
 
 ## Usage
 
@@ -23,13 +28,13 @@ Here is how to create a button and setting its style:
 ```swift
 import DynamicButton
 
-let dynamicButton = DynamicButton(style: DynamicButtonStyle.hamburger)
+let dynamicButton = DynamicButton(style: .hamburger)
 // Equivalent to
 // let dynamicButton   = DynamicButton()
-// dynamicButton.style = DynamicButtonStyle.hamburger
+// dynamicButton.style = .hamburger
 
 // Animate the style update
-dynamicButton.setStyle(DynamicButtonStyle.close, animated: true)
+dynamicButton.setStyle(.close, animated: true)
 ```
 
 ### Customization
@@ -45,7 +50,7 @@ dynamicButton.highlightStokeColor = .gray
 
 ### Supported Symbol Styles
 
-Here is the symbol list (`DynamicButtonStyle`) already implemented by the library:
+Here is the symbol list (`DynamicButton.Style`) already implemented by the library:
 
  - `.arrowDown`: downwards arrow `↓`
  - `.arrowLeft`: leftwards arrow `←`
@@ -77,28 +82,33 @@ Here is the symbol list (`DynamicButtonStyle`) already implemented by the librar
 
 ### Custom symbol
 
-To create your own symbols you have to create an object that inherit of the `DynamicButtonStyle` and override the designated init:
+To create your own symbols you have to create an object (or struct) that conforms to the `DynamicButtonBuildableStyle` protocol:
 
 ```swift
-/// Vertical line style: |
-class MyCustomVerticalLine: DynamicButtonStyle {
-  convenience required public init(center: CGPoint, size: CGFloat, offset: CGPoint, lineWidth: CGFloat) {
+/// Diagonal line style: \
+struct MyCustomLine: Style, DynamicButtonBuildable {
+  let pathVector: DynamicButtonPathVector
+
+  init(center: CGPoint, size: CGFloat, offset: CGPoint, lineWidth: CGFloat) {
     let r = size / 2
-    let c = cos(Float.pi / 2)
-    let s = sin(Float.pi / 2)
+    let c = cos(CGFloat.pi * 0.3)
+    let s = sin(CGFloat.pi * 0.3)
 
-    let path = CGMutablePath()
-    path.move(to: CGPoint(x: center.x + r * c, y: center.y + r * s))
-    path.addLine(to: CGPoint(x: center.x - r * c, y: center.y - r * s))
+    let p1 = CGMutablePath()
+    p1.move(to: CGPoint(x: center.x + r * c, y: center.y + r * s))
+    p1.addLine(to: CGPoint(x: center.x - r * c, y: center.y - r * s))
 
-    self.init(pathVector: (p1, p1, p1, p1))
+    pathVector = DynamicButtonPathVector(p1: p1, p2: p1, p3: p1, p4: p1)
+  }
+
+  /// "MyCustomLine" style.
+  static var styleName: String {
+    return "MyCustomLine"
   }
 }
 
-let myButton = DynamicButton(style: MyCustomVerticalLine.self)
+let myButton.style = .custom(MyCustomLine.self)
 ```
-
-Here the `PathHelper` class is an utility to build more easily the paths. You can checkout the implemented symbols to understand how it works.
 
 Note that a symbol can not have more than 4 paths.
 
@@ -126,7 +136,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.0'
 
 use_frameworks!
-pod 'DynamicButton', '~> 3.1.0'
+pod 'DynamicButton', '~> 4.0.0'
 ```
 
 Install into your project:
@@ -157,7 +167,7 @@ $ brew install carthage
 To integrate `DynamicButton` into your Xcode project using Carthage, specify it in your `Cartfile` file:
 
 ```ogdl
-github "yannickl/DynamicButton" >= 3.1.0
+github "yannickl/DynamicButton" >= 4.0.0
 ```
 
 #### Swift Package Manager
@@ -171,7 +181,7 @@ let package = Package(
     name: "YOUR_PROJECT_NAME",
     targets: [],
     dependencies: [
-        .Package(url: "https://github.com/yannickl/DynamicButton.git", versions: "3.1.0" ..< Version.max)
+        .Package(url: "https://github.com/yannickl/DynamicButton.git", versions: "4.0.0" ..< Version.max)
     ]
 )
 ```
@@ -182,7 +192,7 @@ Note that the [Swift Package Manager](https://swift.org/package-manager) is stil
 
 [Download](https://github.com/YannickL/DynamicButton/archive/master.zip) the project and copy the `DynamicButton` folder into your project to use it in.
 
-## Contribute
+## Contribution
 
 Contributions are welcomed and encouraged *♡*.
 

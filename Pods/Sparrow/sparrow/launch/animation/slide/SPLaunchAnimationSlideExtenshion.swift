@@ -26,12 +26,12 @@ public extension SPLaunchAnimation {
     private static let windowColor: UIColor = UIColor.black
     private static let animateDuration: TimeInterval = 1
     private static let delay: TimeInterval = 0.8
-    private static let paralaxTranslationXCoef: CGFloat = 0.3
+    private static let paralaxTranslationXCoef: CGFloat = 1
     
     static func slideWithParalax(
         launchScreenStoryboardName: String = "LaunchScreen",
-        disabelParalaxForFirstViewOnLaunchScreenView: Bool = true,
-        disabelParalaxForFirstViewOnRootViewController: Bool = true,
+        disableParalaxForFirstViewOnLaunchScreenView: Bool = false,
+        disableParalaxForFirstViewOnRootViewController: Bool = false,
         withComplection complection: @escaping ()->() = {},
         onWindow window: UIWindow) {
         
@@ -43,7 +43,7 @@ public extension SPLaunchAnimation {
         
         var rootViewControllerSubviews = (window.rootViewController?.view.subviews)!
 
-        if (disabelParalaxForFirstViewOnRootViewController) {
+        if (disableParalaxForFirstViewOnRootViewController) {
             rootViewControllerSubviews.removeFirst()
         }
         
@@ -53,7 +53,7 @@ public extension SPLaunchAnimation {
         
         var launchScreenViewSubviews = launchScreenView.subviews
 
-        if (disabelParalaxForFirstViewOnLaunchScreenView) {
+        if (disableParalaxForFirstViewOnLaunchScreenView) {
             launchScreenViewSubviews.removeFirst()
         }
         
@@ -74,7 +74,7 @@ public extension SPLaunchAnimation {
                 }
                 launchScreenView.transform = CGAffineTransform(translationX: -screenBounds.width, y: 0)
                 for view in launchScreenViewSubviews {
-                    view.transform = CGAffineTransform.init(translationX: -screenBounds.width * self.paralaxTranslationXCoef, y: 0)
+                    view.transform = CGAffineTransform.init(translationX: -screenBounds.width * self.paralaxTranslationXCoef + screenBounds.width / 1.5, y: 0)
                 }
         }, completion: {
             finished in

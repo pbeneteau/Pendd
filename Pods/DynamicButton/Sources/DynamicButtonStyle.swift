@@ -26,152 +26,159 @@
 
 import UIKit
 
-/**
- A button path is a container with the necessary paths to build the button.
- */
-open class DynamicButtonStyle: CustomStringConvertible {
-  /// Downwards arrow: ↓
-  public static let arrowDown = DynamicButtonStyleArrowDown.self
-
-  /// Leftwards arrow: ←
-  public static let arrowLeft = DynamicButtonStyleArrowLeft.self
-
-  /// Rightwards arrow: →
-  public static let arrowRight = DynamicButtonStyleArrowRight.self
-
-  /// Upwards arrow: ↑
-  public static let arrowUp = DynamicButtonStyleArrowUp.self
-
-  /// Down caret: ⌄
-  public static let caretDown = DynamicButtonStyleCaretDown.self
-
-  /// Left caret: ‹
-  public static let caretLeft = DynamicButtonStyleCaretLeft.self
-
-  /// Left caret: ›
-  public static let caretRight = DynamicButtonStyleCaretRight.self
-
-  /// Up caret: ⌃
-  public static let caretUp = DynamicButtonStyleCaretUp.self
-
-  /// Check mark: ✓
-  public static let checkMark = DynamicButtonStyleCheckMark.self
-
-  /// Close symbol surrounded by a circle
-  public static let circleClose = DynamicButtonStyleCircleClose.self
-
-  /// Plus symbol surrounded by a circle
-  public static let circlePlus = DynamicButtonStyleCirclePlus.self
-
-  /// Close symbol: X
-  public static let close = DynamicButtonStyleClose.self
-
-  /// Dot symbol: .
-  public static let dot = DynamicButtonStyleDot.self
-
-  /// Downwards triangle-headed arrow to bar: ⤓
-  public static let download = DynamicButtonStyleDownload.self
-
-  /// Fast forward: ≫
-  public static let fastForward = DynamicButtonStyleFastForward.self
-
-  /// Hamburger button: ≡
-  public static let hamburger = DynamicButtonStyleHamburger.self
-
-  /// Horizontal line: ―
-  public static let horizontalLine = DynamicButtonStyleHorizontalLine.self
-
-  /// Horizontal more options: …
-  public static let horizontalMoreOptions = DynamicButtonStyleHorizontalMoreOptions.self
-
-  /// No style
-  public static let none = DynamicButtonStyleNone.self
-
-  /// Pause symbol: ‖
-  public static let pause = DynamicButtonStylePause.self
-
-  /// Play symbol: ► \{U+25B6}
-  public static let play = DynamicButtonStylePlay.self
-
-  /// Plus symbol: +
-  public static let plus = DynamicButtonStylePlus.self
-
-  /// Reload symbol: ↻
-  public static let reload = DynamicButtonStyleReload.self
-
-  /// Rewind symbol: ≪
-  public static let rewind = DynamicButtonStyleRewind.self
-
-  /// Stop symbol: ◼ \{U+2588}
-  public static let stop = DynamicButtonStyleStop.self
-
-  /// Vertical line: |
-  public static let verticalLine = DynamicButtonStyleVerticalLine.self
-
-  /// Vertical more options: ⋮
-  public static let verticalMoreOptions = DynamicButtonStyleVerticalMoreOptions.self
-
-  /// Returns all the available styles
-  public static let allStyles: [DynamicButtonStyle.Type] = [none, arrowDown, arrowLeft, arrowRight, arrowUp, caretDown, caretLeft, caretRight, caretUp, checkMark, circleClose, circlePlus, close, plus, dot, download, reload, rewind, fastForward, play, pause, stop, hamburger, horizontalLine, verticalLine, horizontalMoreOptions, verticalMoreOptions]
-
-  let path1: CGPath
-  let path2: CGPath
-  let path3: CGPath
-  let path4: CGPath
-
+extension DynamicButton {
   /**
-   Initializes a dynamic button with 4 paths.
-
-   - parameter path1: A path.
-   - parameter path2: A path.
-   - parameter path3: A path.
-   - parameter path4: A path.
+   A collection of predefined buton styles.
    */
-  @available(*, deprecated: 10.0)
-  public convenience init(path1: CGPath, path2: CGPath, path3: CGPath, path4: CGPath) {
-    self.init(pathVector: (path1, path2, path3, path4))
-  }
+  public enum Style {
+    /// Downwards arrow: ↓
+    case arrowDown
+    /// Leftwards arrow: ←
+    case arrowLeft
+    /// Rightwards arrow: →
+    case arrowRight
+    /// Upwards arrow: ↑
+    case arrowUp
+    /// Down caret: ⌄
+    case caretDown
+    /// Left caret: ‹
+    case caretLeft
+    /// Left caret: ›
+    case caretRight
+    /// Up caret: ⌃
+    case caretUp
+    /// Check mark: ✓
+    case checkMark
+    /// Close symbol surrounded by a circle
+    case circleClose
+    /// Plus symbol surrounded by a circle
+    case circlePlus
+    /// Close symbol: X
+    case close
+    /// Dot symbol: .
+    case dot
+    /// Downwards triangle-headed arrow to bar: ⤓
+    case download
+    /// Fast forward: ≫
+    case fastForward
+    /// Hamburger button: ≡
+    case hamburger
+    /// Horizontal line: ―
+    case horizontalLine
+    /// Horizontal more options: …
+    case horizontalMoreOptions
+    /// No style
+    case none
+    /// Pause symbol: ‖
+    case pause
+    /// Play symbol: ► \{U+25B6}
+    case play
+    /// Plus symbol: +
+    case plus
+    /// Reload symbol: ↻
+    case reload
+    /// Rewind symbol: ≪
+    case rewind
+    /// Stop symbol: ◼ \{U+2588}
+    case stop
+    /// Vertical line: |
+    case verticalLine
+    /// Vertical more options: ⋮
+    case verticalMoreOptions
+    /// Custom style with its associate buildable style
+    case custom(DynamicButtonBuildableStyle.Type)
 
-  /**
-   Initializes a dynamic button with a vector of 4 paths.
-   
-   - parameter pathVector: A tuple of 4 paths.
-   */
-  public init(pathVector: (CGPath, CGPath, CGPath, CGPath)) {
-    self.path1 = pathVector.0
-    self.path2 = pathVector.1
-    self.path3 = pathVector.2
-    self.path4 = pathVector.3
-  }
+    /// Returns all the available styles
+    public static let all: [Style] = Style.buildableByStyle.map { $0 }.sorted { $0.0.value.styleName < $0.1.value.styleName }.map { $0.0 }
 
-  /**
-   Initializes a dynamic button style using a center point, the square area size, an offset point and the line width of the stroke.
-   - parameter center: The center point of the area where path must be drawn.
-   - parameter size: The size of the area. This is a float because the area is always a square.
-   - parameter offset: The offset point of the button.
-   - parameter lineWidth: The line width used to draw the stroke.
-   */
-  convenience required public init(center: CGPoint, size: CGFloat, offset: CGPoint, lineWidth: CGFloat) {
-    let dummyPath = UIBezierPath().cgPath
+    // MARK: - Building Button Styles
 
-    self.init(pathVector: (dummyPath, dummyPath, dummyPath, dummyPath))
-  }
+    public func build(center: CGPoint, size: CGFloat, offset: CGPoint, lineWidth: CGFloat) -> DynamicButtonBuildableStyle {
+      switch self {
+      case .custom(let buildable):
+        return buildable.init(center: center, size: size, offset: offset, lineWidth: lineWidth)
+      default:
+        let buildable = Style.buildableByStyle[self]!
 
-  // MARK: - Configuring Animation
+        return buildable.init(center: center, size: size, offset: offset, lineWidth: lineWidth)
+      }
+    }
 
-  final func animationConfigurations(_ layer1: CAShapeLayer, layer2: CAShapeLayer, layer3: CAShapeLayer, layer4: CAShapeLayer) -> [(keyPath: String, layer: CAShapeLayer, newValue: CGPath?, key: String)] {
-    return [
-      (keyPath: "path", layer: layer4, newValue: path4, key: "animateLine4Path"),
-      (keyPath: "path", layer: layer1, newValue: path1, key: "animateLine1Path"),
-      (keyPath: "path", layer: layer2, newValue: path2, key: "animateLine2Path"),
-      (keyPath: "path", layer: layer3, newValue: path3, key: "animateLine3Path")
+    public var description: String {
+      let buildable = Style.buildableByStyle[self]!
+
+      return buildable.styleName
+    }
+
+    // MARK: - Convenient Style Description
+
+    private static let buildableByStyle: [Style: DynamicButtonBuildableStyle.Type] = [
+      none: DynamicButtonStyleNone.self,
+      arrowDown: DynamicButtonStyleArrowDown.self,
+      arrowLeft: DynamicButtonStyleArrowLeft.self,
+      arrowRight: DynamicButtonStyleArrowRight.self,
+      arrowUp: DynamicButtonStyleArrowUp.self,
+      caretDown: DynamicButtonStyleCaretDown.self,
+      caretLeft: DynamicButtonStyleCaretLeft.self,
+      caretRight: DynamicButtonStyleCaretRight.self,
+      caretUp: DynamicButtonStyleCaretUp.self,
+      checkMark: DynamicButtonStyleCheckMark.self,
+      circleClose: DynamicButtonStyleCircleClose.self,
+      circlePlus: DynamicButtonStyleCirclePlus.self,
+      close: DynamicButtonStyleClose.self,
+      plus: DynamicButtonStylePlus.self,
+      dot: DynamicButtonStyleDot.self,
+      download: DynamicButtonStyleDownload.self,
+      reload: DynamicButtonStyleReload.self,
+      rewind: DynamicButtonStyleRewind.self,
+      fastForward: DynamicButtonStyleFastForward.self,
+      play: DynamicButtonStylePlay.self,
+      pause: DynamicButtonStylePause.self,
+      stop: DynamicButtonStyleStop.self,
+      hamburger: DynamicButtonStyleHamburger.self,
+      horizontalLine: DynamicButtonStyleHorizontalLine.self,
+      verticalLine: DynamicButtonStyleVerticalLine.self,
+      horizontalMoreOptions: DynamicButtonStyleHorizontalMoreOptions.self,
+      verticalMoreOptions: DynamicButtonStyleVerticalMoreOptions.self
     ]
+
+    /**
+     Returns the style with the given style name.
+
+     - parameter styleName: the style name defined by the `DynamicButtonBuildableStyle` protocol.
+     */
+    public static let styleByName: [String: Style] = Style.buildableByStyle.reduce([:]) { (acc, entry) in
+      var acc = acc
+      
+      acc[entry.1.styleName] = entry.0
+      
+      return acc
+    }
   }
+}
 
-  // MARK: - Conforming the CustomStringConvertible Protocol
+extension DynamicButton.Style: Equatable {
+  public static func ==(lhs: DynamicButton.Style, rhs: DynamicButton.Style) -> Bool {
+    switch (lhs, rhs) {
+    case (.none, .none), (.arrowDown, .arrowDown), (.arrowLeft, .arrowLeft), (.arrowRight, .arrowRight), (.arrowUp, .arrowUp), (.caretDown, .caretDown), (.caretLeft, .caretLeft), (.caretRight, .caretRight), (.caretUp, .caretUp), (.checkMark, .checkMark), (.circleClose, .circleClose), (.circlePlus, .circlePlus), (.close, .close), (.plus, .plus), (.dot, .dot), (.download, .download), (.reload, .reload), (.rewind, .rewind), (.fastForward, .fastForward), (.play, .play), (.pause, .pause), (.stop, .stop), (.hamburger, .hamburger), (.horizontalLine, .horizontalLine), (.verticalLine, .verticalLine), (.horizontalMoreOptions, .horizontalMoreOptions), (.verticalMoreOptions, .verticalMoreOptions):
+      return true
+    case (.custom(let b1), .custom(let b2)):
+      return b1.styleName == b2.styleName
+    default:
+      return false
+    }
+  }
+}
 
-  /// A textual representation of `self`.
-  open var description: String {
-    return "No style"
+extension DynamicButton.Style: Hashable {
+  public var hashValue: Int {
+    switch self {
+    case .none:
+      return 0
+    case .custom(let buildable):
+      return buildable.styleName.hashValue
+    default:
+      return 1
+    }
   }
 }

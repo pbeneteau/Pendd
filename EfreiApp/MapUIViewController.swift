@@ -39,9 +39,9 @@ class MapUIViewController: UIViewController, MKMapViewDelegate {
         
         self.mapView.delegate = self
         
-        minifyButton.setStyle(DynamicButtonStyle.caretDown, animated: false)
+        minifyButton.setStyle(.caretDown, animated: false)
         minifyButton.strokeColor = UIColor.white
-        closeButton.setStyle(DynamicButtonStyle.close, animated: false)
+        closeButton.setStyle(.close, animated: false)
         configureMap()
 
     }
@@ -79,7 +79,7 @@ class MapUIViewController: UIViewController, MKMapViewDelegate {
                 self.barView.frame.origin.y += self.containerView.frame.height
                 self.containerView.frame.origin.y += self.containerView.frame.height
             })
-            minifyButton.setStyle(DynamicButtonStyle.caretUp, animated: true)
+            minifyButton.setStyle(.caretUp, animated: true)
             containerViewIsVisible = false
         } else {
             
@@ -88,7 +88,7 @@ class MapUIViewController: UIViewController, MKMapViewDelegate {
                 self.barView.frame.origin.y -= self.containerView.frame.height
                 self.containerView.frame.origin.y -= self.containerView.frame.height
             })
-            minifyButton.setStyle(DynamicButtonStyle.caretDown, animated: true)
+            minifyButton.setStyle(.caretDown, animated: true)
             containerViewIsVisible = true
         }
     }

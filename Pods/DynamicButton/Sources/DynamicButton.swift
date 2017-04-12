@@ -37,7 +37,7 @@ between each style changes.
   let line3Layer = CAShapeLayer()
   let line4Layer = CAShapeLayer()
 
-  var buttonStyle: DynamicButtonStyle.Type = DynamicButtonStyleHamburger.self
+  private var _style: Style = .hamburger
 
   lazy var allLayers: [CAShapeLayer] = {
     return [self.line1Layer, self.line2Layer, self.line3Layer, self.line4Layer]
@@ -58,10 +58,10 @@ between each style changes.
   - parameter style: The style of the button.
   - returns: An initialized view object or nil if the object couldn't be created.
   */
-  required public init(style: DynamicButtonStyle.Type) {
+  required public init(style: Style) {
     super.init(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
 
-    buttonStyle = style
+    _style = style
 
     setup()
   }
@@ -93,7 +93,7 @@ between each style changes.
     intrinsicSize   = min(width, height)
     intrinsicOffset = CGPoint(x: contentEdgeInsets.left + (width - intrinsicSize) / 2, y: contentEdgeInsets.top + (height - intrinsicSize) / 2)
 
-    setStyle(buttonStyle, animated: false)
+    setStyle(_style, animated: false)
   }
 
   public override func setTitle(_ title: String?, for state: UIControlState) {
@@ -137,19 +137,15 @@ between each style changes.
       sublayer.strokeColor   = strokeColor.cgColor
     }
 
-    setStyle(buttonStyle, animated: false)
+    setStyle(_style, animated: false)
   }
 
   // MARK: - Configuring Buttons
 
   /// The button style. The setter is equivalent to the setStyle(, animated:) method with animated value to false. Defaults to Hamburger.
-  @IBInspectable public var style: DynamicButtonStyle.Type {
-    get {
-      return buttonStyle
-    }
-    set (newValue) {
-      setStyle(newValue, animated: false)
-    }
+  @IBInspectable public var style: Style {
+    get { return _style }
+    set (newValue) { setStyle(newValue, animated: false) }
   }
 
   /**
@@ -158,19 +154,19 @@ between each style changes.
   - parameter style: The style of the button.
   - parameter animated: If true the transition between the old style and the new one is animated.
   */
-  public func setStyle(_ style: DynamicButtonStyle.Type, animated: Bool) {
-    buttonStyle = style
+  public func setStyle(_ style: Style, animated: Bool) {
+    _style = style
 
-    let center = CGPoint(x: intrinsicOffset.x + intrinsicSize / 2, y: intrinsicOffset.y + intrinsicSize / 2)
-    let style  = style.init(center: center, size: intrinsicSize, offset: intrinsicOffset, lineWidth: lineWidth)
+    let center    = CGPoint(x: intrinsicOffset.x + intrinsicSize / 2, y: intrinsicOffset.y + intrinsicSize / 2)
+    let buildable = style.build(center: center, size: intrinsicSize, offset: intrinsicOffset, lineWidth: lineWidth)
 
-    applyButtonStyle(style, animated: animated)
+    applyButtonBuildable(buildable, animated: animated)
   }
 
-  func applyButtonStyle(_ buttonStyle: DynamicButtonStyle, animated: Bool) {
-    accessibilityValue = buttonStyle.description
+  func applyButtonBuildable(_ buildable: DynamicButtonBuildableStyle, animated: Bool) {
+    accessibilityValue = buildable.description
     
-    for config in buttonStyle.animationConfigurations(line1Layer, layer2: line2Layer, layer3: line3Layer, layer4: line4Layer) {
+    for config in buildable.animationConfigurations(line1Layer, layer2: line2Layer, layer3: line3Layer, layer4: line4Layer) {
       if animated {
         let anim       = animationWithKeyPath(config.keyPath, damping: 10)
         anim.fromValue = config.layer.path
@@ -188,16 +184,12 @@ between each style changes.
 
   /// Specifies the line width used when stroking the button paths. Defaults to two.
   @IBInspectable public var lineWidth: CGFloat = 2 {
-    didSet {
-      setupLayerPaths()
-    }
+    didSet { setupLayerPaths() }
   }
 
   /// Specifies the color to fill the path's stroked outlines, or nil for no stroking. Defaults to black.
-  @IBInspectable public var strokeColor: UIColor = UIColor.black {
-    didSet {
-      setupLayerPaths()
-    }
+  @IBInspectable public var strokeColor: UIColor = .black {
+    didSet { setupLayerPaths() }
   }
 
   /// Specifies the color to fill the path's stroked outlines when the button is highlighted, or nil to use the strokeColor. Defaults to nil.
@@ -235,7 +227,7 @@ between each style changes.
   var defaultBackgroundColor: UIColor = .clear
 
   func highlightAction() {
-    defaultBackgroundColor = backgroundColor ?? UIColor.clear
+    defaultBackgroundColor = backgroundColor ?? .clear
     backgroundColor        = highlightBackgroundColor ?? defaultBackgroundColor
 
     for sublayer in allLayers {

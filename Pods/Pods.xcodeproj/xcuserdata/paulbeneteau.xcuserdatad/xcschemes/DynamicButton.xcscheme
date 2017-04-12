@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'AAE24ACA00B7B35A5EB9168B684E5317'
+               BlueprintIdentifier = 'BA074C577779FF88EB7926723ED9D0B1'
                BlueprintName = 'DynamicButton'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'DynamicButton.framework'>

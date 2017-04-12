@@ -25,7 +25,6 @@ class mainUser {
     private var ratioHA: Double!
     private var profileCompletion: Int!
     
-    let Location1: LocationManager = LocationManager()
     
     func initUserFirstName(userId: String, completionHandler: @escaping (_ total: String) -> ()) {
         let userRef = ref.child("users").child(userId).child("firstName")

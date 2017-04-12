@@ -4,7 +4,8 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>ArialHB</string>
+		<string>Avenir.ttc</string>
+		<string>ArialHB.ttc</string>
 	</array>
 	<key>NSCalendarsUsageDescription</key>
 	<string>We need this to save events in your calendar</string>

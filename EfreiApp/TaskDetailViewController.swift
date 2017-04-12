@@ -94,9 +94,9 @@ class SubmitHelpProposalViewController: UIViewController {
     
     @IBAction func acceptTaskButton(_ sender: Any) {
 
-        let calendar = NSCalendar.current
+        _ = NSCalendar.current
         
-        let description = "Address: \(taskAddress)"
+        _ = "Address: \(taskAddress)"
         
         //let beginDateString = self.nsDate
         

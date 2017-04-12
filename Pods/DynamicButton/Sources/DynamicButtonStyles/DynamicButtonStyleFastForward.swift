@@ -27,8 +27,10 @@
 import UIKit
 
 /// Fast forward style: ≫
-final public class DynamicButtonStyleFastForward: DynamicButtonStyle {
-  convenience required public init(center: CGPoint, size: CGFloat, offset: CGPoint, lineWidth: CGFloat) {
+struct DynamicButtonStyleFastForward: DynamicButtonBuildableStyle {
+  let pathVector: DynamicButtonPathVector
+
+  init(center: CGPoint, size: CGFloat, offset: CGPoint, lineWidth: CGFloat) {
     let thirdSize = size / 3
     let sixthSize = size / 6
     
@@ -43,13 +45,11 @@ final public class DynamicButtonStyleFastForward: DynamicButtonStyle {
     let p3 = PathHelper.line(from: a, to: c, offset: CGPoint(x: ofc.x + sixthSize, y: ofc.y))
     let p4 = PathHelper.line(from: a, to: c, offset: CGPoint(x: ofc.x - sixthSize, y: ofc.y))
 
-    self.init(pathVector: (p1, p2, p3, p4))
+    pathVector = DynamicButtonPathVector(p1: p1, p2: p2, p3: p3, p4: p4)
   }
 
-  // MARK: - Conforming the CustomStringConvertible Protocol
-
-  /// A textual representation of "Fast Forward" style.
-  public override var description: String {
-    return "Fast Forward"
+  /// "Fast Forward" style.
+  static var styleName: String {
+    return "Player - Fast Forward"
   }
 }

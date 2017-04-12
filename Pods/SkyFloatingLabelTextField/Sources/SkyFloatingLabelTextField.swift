@@ -315,6 +315,7 @@ open class SkyFloatingLabelTextField: UITextField {
      Attempt the control to become the first responder
      - returns: True when successfull becoming the first responder
     */
+    @discardableResult
     override open func becomeFirstResponder() -> Bool {
         let result = super.becomeFirstResponder()
         self.updateControl(true)
@@ -325,6 +326,7 @@ open class SkyFloatingLabelTextField: UITextField {
      Attempt the control to resign being the first responder
      - returns: True when successfull resigning being the first responder
      */
+    @discardableResult
     override open func resignFirstResponder() -> Bool {
         let result =  super.resignFirstResponder()
         self.updateControl(true)
@@ -410,7 +412,7 @@ open class SkyFloatingLabelTextField: UITextField {
     /*
     *   Set this value to make the title visible
     */
-    open func setTitleVisible(_ titleVisible:Bool, animated:Bool = false, animationCompletion: (()->())? = nil) {
+    open func setTitleVisible(_ titleVisible:Bool, animated:Bool = false, animationCompletion: ((_ completed: Bool) -> Void)? = nil) {
         if(_titleVisible == titleVisible) {
             return
         }
@@ -427,7 +429,7 @@ open class SkyFloatingLabelTextField: UITextField {
         return self.hasText || self.hasErrorMessage || _titleVisible
     }
 
-    fileprivate func updateTitleVisibility(_ animated:Bool = false, completion: (()->())? = nil) {
+    fileprivate func updateTitleVisibility(_ animated:Bool = false, completion: ((_ completed: Bool) -> Void)? = nil) {
         let alpha:CGFloat = self.isTitleVisible() ? 1.0 : 0.0
         let frame:CGRect = self.titleLabelRectForBounds(self.bounds, editing: self.isTitleVisible())
         let updateBlock = { () -> Void in
@@ -440,12 +442,10 @@ open class SkyFloatingLabelTextField: UITextField {
 
             UIView.animate(withDuration: duration, delay: 0, options: animationOptions, animations: { () -> Void in
                 updateBlock()
-                }, completion: { _ in
-                    completion?()
-                })
+                }, completion: completion)
         } else {
             updateBlock()
-            completion?()
+            completion?(true)
         }
     }
 
@@ -542,6 +542,9 @@ open class SkyFloatingLabelTextField: UITextField {
         if #available(iOS 8.0, *) {
             super.prepareForInterfaceBuilder()
         }
+        
+        self.borderStyle = .none
+        
         self.isSelected = true
         _renderingInInterfaceBuilder = true
         self.updateControl(false)

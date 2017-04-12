@@ -19,6 +19,9 @@
 		381BE37D1E925B09006FFC05 /* LoginEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381BE37C1E925B09006FFC05 /* LoginEmailViewController.swift */; };
 		3826EE9E1E82CE5E0000CBDB /* AsksArroundTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3826EE9D1E82CE5E0000CBDB /* AsksArroundTableViewCell.swift */; };
 		383B6BFA1E899B40007B64F7 /* FoldingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383B6BF91E899B40007B64F7 /* FoldingCell.swift */; };
+		38770AF41E9E3891006D83F7 /* Avenir.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 38770AF31E9E3868006D83F7 /* Avenir.ttc */; };
+		38770AF81E9E60E9006D83F7 /* ProfileMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38770AF71E9E60E9006D83F7 /* ProfileMenuTableViewCell.swift */; };
+		38770AFA1E9E8533006D83F7 /* ProfileTabsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38770AF91E9E8533006D83F7 /* ProfileTabsViewController.swift */; };
 		3878090D1E2FAA5400E44CD2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3878090C1E2FAA5400E44CD2 /* LoginViewController.swift */; };
 		388067A71E2FAF1100DB26A0 /* Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388067A61E2FAF1100DB26A0 /* Transition.swift */; };
 		388067A91E2FAF9100DB26A0 /* Walkthrough.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 388067A81E2FAF9100DB26A0 /* Walkthrough.storyboard */; };
@@ -45,6 +48,9 @@
 		38F13DA31E61E58B0081028F /* AsksArround.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F13DA21E61E58B0081028F /* AsksArround.swift */; };
 		38F8A72B1E97926200F6C68E /* LoginViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F8A72A1E97926200F6C68E /* LoginViewUtils.swift */; };
 		38F8A72D1E97FB2300F6C68E /* ArialHB.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 38F8A72C1E97FAFA00F6C68E /* ArialHB.ttc */; };
+		38F9AE901E9BA6A6007E6833 /* ProfileMenuCustomSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F9AE8F1E9BA6A6007E6833 /* ProfileMenuCustomSegue.swift */; };
+		38F9AE971E9CE0C6007E6833 /* HostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F9AE961E9CE0C6007E6833 /* HostViewController.swift */; };
+		38F9AE991E9CE11E007E6833 /* NavigationMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F9AE981E9CE11E007E6833 /* NavigationMenuViewController.swift */; };
 		38FA09A61E32765700C5A9F0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FA09A51E32765700C5A9F0 /* User.swift */; };
 		38FA09A81E32779C00C5A9F0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38FA09A71E32779C00C5A9F0 /* MapKit.framework */; };
 		8E3B3F05EA85DA41251F2257 /* Pods_EfreiAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D95C2264258AEBD408EA7F7 /* Pods_EfreiAppTests.framework */; };
@@ -86,6 +92,9 @@
 		381BE37C1E925B09006FFC05 /* LoginEmailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginEmailViewController.swift; sourceTree = "<group>"; };
 		3826EE9D1E82CE5E0000CBDB /* AsksArroundTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsksArroundTableViewCell.swift; sourceTree = "<group>"; };
 		383B6BF91E899B40007B64F7 /* FoldingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoldingCell.swift; sourceTree = "<group>"; };
+		38770AF31E9E3868006D83F7 /* Avenir.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Avenir.ttc; sourceTree = "<group>"; };
+		38770AF71E9E60E9006D83F7 /* ProfileMenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileMenuTableViewCell.swift; sourceTree = "<group>"; };
+		38770AF91E9E8533006D83F7 /* ProfileTabsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTabsViewController.swift; sourceTree = "<group>"; };
 		3878090C1E2FAA5400E44CD2 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		388067A61E2FAF1100DB26A0 /* Transition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transition.swift; sourceTree = "<group>"; };
 		388067A81E2FAF9100DB26A0 /* Walkthrough.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Walkthrough.storyboard; sourceTree = "<group>"; };
@@ -112,6 +121,9 @@
 		38F13DA21E61E58B0081028F /* AsksArround.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsksArround.swift; sourceTree = "<group>"; };
 		38F8A72A1E97926200F6C68E /* LoginViewUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewUtils.swift; sourceTree = "<group>"; };
 		38F8A72C1E97FAFA00F6C68E /* ArialHB.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = ArialHB.ttc; sourceTree = "<group>"; };
+		38F9AE8F1E9BA6A6007E6833 /* ProfileMenuCustomSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileMenuCustomSegue.swift; sourceTree = "<group>"; };
+		38F9AE961E9CE0C6007E6833 /* HostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostViewController.swift; sourceTree = "<group>"; };
+		38F9AE981E9CE11E007E6833 /* NavigationMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationMenuViewController.swift; sourceTree = "<group>"; };
 		38FA09A51E32765700C5A9F0 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		38FA09A71E32779C00C5A9F0 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		38FA09A91E3277AC00C5A9F0 /* EfreiApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EfreiApp.entitlements; sourceTree = "<group>"; };
@@ -194,7 +206,11 @@
 				381A06F71E659B3F00F6BAA3 /* Location */,
 				38E41B181E69CE780090FB81 /* User */,
 				38E0D6251E60718A0008A5B9 /* WalkThrough */,
+				38F9AE961E9CE0C6007E6833 /* HostViewController.swift */,
+				38F9AE981E9CE11E007E6833 /* NavigationMenuViewController.swift */,
+				38770AF71E9E60E9006D83F7 /* ProfileMenuTableViewCell.swift */,
 				38133E671E2FA60D00506871 /* Main.storyboard */,
+				38F9AE8F1E9BA6A6007E6833 /* ProfileMenuCustomSegue.swift */,
 				38F8A72A1E97926200F6C68E /* LoginViewUtils.swift */,
 				381BE37C1E925B09006FFC05 /* LoginEmailViewController.swift */,
 				388067A81E2FAF9100DB26A0 /* Walkthrough.storyboard */,
@@ -300,6 +316,7 @@
 			children = (
 				389984E01E6B32580023ECBF /* AvailabilityViewController.swift */,
 				389984D61E6A07DB0023ECBF /* ProfileViewController.swift */,
+				38770AF91E9E8533006D83F7 /* ProfileTabsViewController.swift */,
 				389984DA1E6A285D0023ECBF /* ScoreViewController.swift */,
 				38FA09A51E32765700C5A9F0 /* User.swift */,
 			);
@@ -331,6 +348,7 @@
 		38F8A72E1E97FBBF00F6C68E /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				38770AF31E9E3868006D83F7 /* Avenir.ttc */,
 				38F8A72C1E97FAFA00F6C68E /* ArialHB.ttc */,
 			);
 			name = Fonts;
@@ -487,6 +505,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38770AF41E9E3891006D83F7 /* Avenir.ttc in Resources */,
 				38F8A72D1E97FB2300F6C68E /* ArialHB.ttc in Resources */,
 				38133E6E1E2FA60D00506871 /* LaunchScreen.storyboard in Resources */,
 				38133E6B1E2FA60D00506871 /* Assets.xcassets in Resources */,
@@ -660,23 +679,28 @@
 				388067A71E2FAF1100DB26A0 /* Transition.swift in Sources */,
 				388A84D51E6F3388001AD6DB /* SkillsSelectionViewController.swift in Sources */,
 				388067B71E2FBC7C00DB26A0 /* keyboardUtils.swift in Sources */,
+				38770AFA1E9E8533006D83F7 /* ProfileTabsViewController.swift in Sources */,
 				38F13DA11E61E3990081028F /* AsksArroundViewController.swift in Sources */,
 				389984DF1E6A30D90023ECBF /* DeviceInfos.swift in Sources */,
 				389984E11E6B32580023ECBF /* AvailabilityViewController.swift in Sources */,
 				38CF80A01E4F804200FB3F08 /* Location.swift in Sources */,
 				3878090D1E2FAA5400E44CD2 /* LoginViewController.swift in Sources */,
+				38F9AE971E9CE0C6007E6833 /* HostViewController.swift in Sources */,
 				38E41B171E69B1DC0090FB81 /* UserAsks.swift in Sources */,
 				388067B11E2FB36100DB26A0 /* MainViewController.swift in Sources */,
 				38FA09A61E32765700C5A9F0 /* User.swift in Sources */,
 				388067AB1E2FAFA000DB26A0 /* WalkThroughViewController.swift in Sources */,
 				3890456E1E8D9BB90092F276 /* time.swift in Sources */,
 				38E41B141E69B1760090FB81 /* UserAsksViewController.swift in Sources */,
+				38F9AE901E9BA6A6007E6833 /* ProfileMenuCustomSegue.swift in Sources */,
 				3890456A1E8BE8380092F276 /* OtherUserViewController.swift in Sources */,
 				38E0D6291E60778F0008A5B9 /* askViewController.swift in Sources */,
 				38C9A6181E749D4700A7786E /* SkillCollectionViewCell.swift in Sources */,
 				3826EE9E1E82CE5E0000CBDB /* AsksArroundTableViewCell.swift in Sources */,
+				38F9AE991E9CE11E007E6833 /* NavigationMenuViewController.swift in Sources */,
 				38F8A72B1E97926200F6C68E /* LoginViewUtils.swift in Sources */,
 				38E0D6271E6071B40008A5B9 /* Ask.swift in Sources */,
+				38770AF81E9E60E9006D83F7 /* ProfileMenuTableViewCell.swift in Sources */,
 				381BE37D1E925B09006FFC05 /* LoginEmailViewController.swift in Sources */,
 				383B6BFA1E899B40007B64F7 /* FoldingCell.swift in Sources */,
 				38F13DA31E61E58B0081028F /* AsksArround.swift in Sources */,

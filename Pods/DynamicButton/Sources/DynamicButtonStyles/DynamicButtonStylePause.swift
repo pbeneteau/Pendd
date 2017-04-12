@@ -27,23 +27,23 @@
 import UIKit
 
 /// Pause symbol style: ‖
-final public class DynamicButtonStylePause: DynamicButtonStyle {
-  convenience required public init(center: CGPoint, size: CGFloat, offset: CGPoint, lineWidth: CGFloat) {
+struct DynamicButtonStylePause: DynamicButtonBuildableStyle {
+  let pathVector: DynamicButtonPathVector
+
+  init(center: CGPoint, size: CGFloat, offset: CGPoint, lineWidth: CGFloat) {
     let size = size / 3
 
     let leftOffset  = CGPoint(x: size / -2, y: 0)
     let rightOffset = CGPoint(x: size / 2, y: 0)
 
-    let p1 = PathHelper.line(atCenter: center, radius: size, angle: .pi / 2, offset: leftOffset)
-    let p2 = PathHelper.line(atCenter: center, radius: size, angle: .pi / 2, offset: rightOffset)
+    let p12 = PathHelper.line(atCenter: center, radius: size, angle: .pi / 2, offset: leftOffset)
+    let p34 = PathHelper.line(atCenter: center, radius: size, angle: .pi / 2, offset: rightOffset)
 
-    self.init(pathVector: (p1, p1, p2, p2))
+    pathVector = DynamicButtonPathVector(p1: p12, p2: p12, p3: p34, p4: p34)
   }
 
-  // MARK: - Conforming the CustomStringConvertible Protocol
-
-  /// A textual representation of "Pause" style.
-  public override var description: String {
-    return "Pause"
+  /// "Pause" style.
+  static var styleName: String {
+    return "Player - Pause"
   }
 }

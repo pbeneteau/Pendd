@@ -15,7 +15,6 @@ import SwiftyJSON
 
 class locationHelp {
     
-    let Location1:LocationManager = LocationManager()
     
     let ref = FIRDatabase.database().reference()
     
@@ -48,15 +47,15 @@ class locationHelp {
     // Get current user City, PostalCode and Country code
     func getLocationDetails(location1: CLLocation, completionHandler: @escaping (_ state: Bool) -> ()) {
         
-        _ = Location.reverse(coordinates: location1.coordinate, onSuccess: { foundPlacemark in
+        _ = Location.getPlacemark(forLocation: location1, success: { foundPlacemark in
             
-            if let countryCode = foundPlacemark.isoCountryCode {
+            if let countryCode = foundPlacemark[0].isoCountryCode {
                 self.countryCode = countryCode
             }
-            if let postalCode = foundPlacemark.postalCode {
+            if let postalCode = foundPlacemark[0].postalCode {
                 self.postalCode = postalCode
             }
-            if let state = foundPlacemark.administrativeArea {
+            if let state = foundPlacemark[0].administrativeArea {
                 self.state = state
             }
             if self.countryCode != "" && self.postalCode != "" && self.state != "" {
@@ -71,11 +70,14 @@ class locationHelp {
     }
     
     func updateUserLocation(completionHandler: @escaping (_ locationFound: CLLocation) -> ()) {
-        _ = Location.getLocation(withAccuracy: .block, frequency: .oneShot, timeout: nil, onSuccess: { (location) in
+        
+        _ = Location.getLocation(accuracy: .block, frequency: .oneShot, timeout: nil, success: { (_, location) in
             self.location = location
             completionHandler(location)
-        }) { (last, err) in
-            print("err \(err)")
+            
+        }) { (request, last, err) in
+            request.cancel()
+            print("Location monitoring failed due to an error \(err)")
         }
     }
     
